@@ -1,0 +1,22 @@
+        // // Home team shoots
+        // if(homeShot[1]){
+        //     homeTeamScore = homeTeamScore + homeShot[0];
+        // } 
+        // // If the team misses the shot then check to see what team gets the rebound
+        // else{
+        //     let reboundTeam = teamRebound(homeTeam, visitorTeam);
+            
+        //     // Whichever team gets the rebound gets to shoot the ball again
+        //     let teamShot = playerShoots(teamShooter(reboundTeam));
+        // }
+
+        // // Visitor team shoots
+        // if(visitorShot[1]){
+        //     visitorTeamScore = visitorTeamScore + visitorShot[0];
+        // }
+        // else{
+        //     let reboundTeam = teamRebound(visitorTeam, homeTeam);
+
+        //     // Whichever team gets the rebound gets to shoot the ball again
+        //     let teamShot = playerShoots(teamShooter(reboundTeam));
+        // }
