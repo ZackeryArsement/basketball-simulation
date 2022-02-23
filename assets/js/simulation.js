@@ -182,11 +182,11 @@ let clevelandCaveliers = [
     }
 ];
 
-teamSeasonPercentage(goldenState);
-teamSeasonPercentage(clevelandCaveliers);
+// teamSeasonPercentage(goldenState);
+// teamSeasonPercentage(clevelandCaveliers);
 
 // Run a game where each team shoots at minimum 1 shot per 1 minute... 3 chances to put up missed shots
-runGame(goldenState, clevelandCaveliers, 1, 1, 3);
+// runGame(goldenState, clevelandCaveliers, 1, 1, 3);
 
 // Establish each players 2pt% and 3pt% 
 function teamSeasonPercentage(currentTeam){
@@ -442,3 +442,53 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
     console.log('The home team shot ' + homeTeamShots + ' times.');
     console.log('The home team shot ' + visitorTeamShots + ' times.');
 };
+
+// Fill in the table for the stats of the current game
+function createMainTable(homeTeam, visitorTeam){
+    let homeTable = document.getElementById('main-table-home');
+    let visitorTable = document.getElementById('main-table-visitor');
+    let currentTeam;
+    let currentTable;
+
+    // Fill in both tables
+    for(let teamIndex=0; teamIndex<2; teamIndex++){
+        if(teamIndex === 0){
+            currentTeam = homeTeam;
+            currentTable = homeTable;
+        }else{
+            currentTeam = visitorTeam;
+            currentTable = visitorTable;
+        }
+
+        let tableBody = currentTable.querySelector('tbody');
+
+        // Create a row for each player
+        for(let playerIndex=0; playerIndex<(currentTeam.length - 1); playerIndex++){
+            let newRow = document.createElement('tr');
+
+            // Create a player name column and append to the player's row
+            let nameColumn = document.createElement('th');
+            nameColumn.setAttribute('scope', 'row');
+            nameColumn.textContent = currentTeam[playerIndex].name;
+            newRow.append(nameColumn);
+
+            // Create an array of the players stats
+            let currentPlayer = currentTeam[playerIndex]
+            let playerStats = [currentPlayer.att2, (currentPlayer.made2 + currentPlayer.made3), (currentPlayer.att2 + currentPlayer.att3), currentPlayer.made3, currentPlayer.att3, currentPlayer.defReb]
+            
+            // Create a column for each players stat
+            for(let statIndex=0; statIndex<6; statIndex++){
+                let statColumn = document.createElement('td');
+
+                // Add the stat column to the row being created
+                statColumn.textContent = playerStats[statIndex];
+                newRow.append(statColumn);
+            }
+
+            // Add the newly created row with its stats to the table
+            tableBody.append(newRow);
+        }
+    }
+}
+
+createMainTable(goldenState, clevelandCaveliers);
