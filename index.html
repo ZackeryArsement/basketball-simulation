@@ -10,41 +10,82 @@
 </head>
 
     <body>
-        <table class="table" id="main-table-home">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Player</th>
-                <th scope="col">Points</th>
-                <th scope="col">FGs</th>
-                <th scope="col">FGA</th>
-                <th scope="col">3FGs</th>
-                <th scope="col">3FGA</th>
-                <th scope="col">Rebounds</th>
-              </tr>
-            </thead>
+      <div class="jumbotron jumbotron-fluid m-0 p-0">
+        <div class="container">
+          <img class="m-auto w-100 p-0 winning-banner" src="./assets/images/GSW.jpg">
+        </div>
+      </div>
 
-            <!-- Body of the Home Team Stat Table -->
-            <tbody>
-            </tbody>
-          </table>
-          
-          <table class="table" id="main-table-visitor">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Player</th>
-                <th scope="col">Points</th>
-                <th scope="col">FGs</th>
-                <th scope="col">FGA</th>
-                <th scope="col">3FGs</th>
-                <th scope="col">3FGA</th>
-                <th scope="col">Rebounds</th>
-              </tr>
-            </thead>
+      <!-- Display each teams score -->
+      <div class="row bg-dark pt-2 pb-2">
+        <div class="col-8 m-auto">
+          <div class="row">
 
-            <!-- Body of the Visitor Team Stat Table -->
-            <tbody>
-            </tbody>
-          </table>
+            <!-- Home Team -->
+            <div class="col-6 text-center">
+              <div class="w-75 bg-light rounded m-auto">
+                <h1><u class="home-team-name">Home</u></h1>
+                <h1 class="home-team-score">105</h1>
+              </div>
+            </div>
+
+            <!-- Visitor Team -->
+            <div class="col-6 text-center">
+              <div class="w-75 bg-light rounded m-auto">
+                <h1><u class="visitor-team-name">Visitor</u></h1>
+                <h1 class="visitor-team-score">100</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Declare Winner -->
+      <div class="row bg-secondary">
+        <div class="col-8 m-auto">
+          <div class="row bg-secondary p-2 rounded">
+            <div class="col-6 text-center m-auto bg-light rounded">
+              <h1 class="winning-team-name">Golden State Warriors Win!</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table class="table mb-5" id="main-table-home">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Player</th>
+              <th scope="col">Points</th>
+              <th scope="col">FGs</th>
+              <th scope="col">FGA</th>
+              <th scope="col">3FGs</th>
+              <th scope="col">3FGA</th>
+              <th scope="col">Rebounds</th>
+            </tr>
+          </thead>
+
+          <!-- Body of the Home Team Stat Table -->
+          <tbody>
+          </tbody>
+        </table>
+        
+      <table class="table" id="main-table-visitor">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Player</th>
+            <th scope="col">Points</th>
+            <th scope="col">FGs</th>
+            <th scope="col">FGA</th>
+            <th scope="col">3FGs</th>
+            <th scope="col">3FGA</th>
+            <th scope="col">Rebounds</th>
+          </tr>
+        </thead>
+
+        <!-- Body of the Visitor Team Stat Table -->
+        <tbody>
+        </tbody>
+      </table>
     </body>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>

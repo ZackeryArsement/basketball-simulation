@@ -82,6 +82,7 @@ let goldenState = [
     },
     {
         teamName: "Golden State Warriors",
+        imgURL: "./assets/images/GSW.jpg",
         totShots: null,
         offReb: null,
         defReb: null,
@@ -174,6 +175,7 @@ let clevelandCaveliers = [
     },
     {
         teamName: "Cleveland Caveliers",
+        imgURL: "./assets/images/CLE-banner.png",
         totShots: null,
         offReb: null,
         defReb: null,
@@ -349,6 +351,54 @@ function teamRebound(offTeam, defTeam){
     }
 }
 
+// Fill in the table for the stats of the current game
+function createMainTable(homeTeam, visitorTeam){
+    let homeTable = document.getElementById('main-table-home');
+    let visitorTable = document.getElementById('main-table-visitor');
+    let currentTeam;
+    let currentTable;
+
+    // Fill in both tables
+    for(let teamIndex=0; teamIndex<2; teamIndex++){
+        if(teamIndex === 0){
+            currentTeam = homeTeam;
+            currentTable = homeTable;
+        }else{
+            currentTeam = visitorTeam;
+            currentTable = visitorTable;
+        }
+
+        let tableBody = currentTable.querySelector('tbody');
+
+        // Create a row for each player
+        for(let playerIndex=0; playerIndex<(currentTeam.length); playerIndex++){
+            let newRow = document.createElement('tr');
+
+            // Create a player name column and append to the player's row
+            let nameColumn = document.createElement('th');
+            nameColumn.setAttribute('scope', 'row');
+            nameColumn.textContent = currentTeam[playerIndex].name;
+            newRow.append(nameColumn);
+
+            // Create an array of the players stats
+            let currentPlayer = currentTeam[playerIndex]
+            let playerStats = [currentPlayer.points, (currentPlayer.made2 + currentPlayer.made3), (currentPlayer.att2 + currentPlayer.att3), currentPlayer.made3, currentPlayer.att3, (currentPlayer.offReb + currentPlayer.defReb)];
+            
+            // Create a column for each players stat
+            for(let statIndex=0; statIndex<6; statIndex++){
+                let statColumn = document.createElement('td');
+
+                // Add the stat column to the row being created
+                statColumn.textContent = playerStats[statIndex];
+                newRow.append(statColumn);
+            }
+
+            // Add the newly created row with its stats to the table
+            tableBody.append(newRow);
+        }
+    }
+}
+
 // Run a game simulation (team1, team2, team shots/iteration, minutes/iteration, reshots allowed / iteration)
 function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
     let numbIterations = 48/itMin;
@@ -394,6 +444,7 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
     // Get team percentages based on their opponent... chance to get rebounds
     playerGamePercentage(homeTeam, visitorTeam)
 
+    // Each team shoots a shot for every iteration in the game
     for(let i=0; i<numbIterations; i++){
         // Each team shoots at a base amount once... figure out which player shoots
         let shooterHome = teamShooter(homeTeam);
@@ -428,6 +479,10 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
                 // If the team misses the shot then check to see what team gets the rebound
                 else{
                     let reboundTeam = teamRebound(homeTeam, visitorTeam);
+
+                    // Return index of player that rebounded and if Offensive of defensive
+                    let reboundPlayer = playerRebound(reboundTeam);
+                    addReboundStat('Home', reboundPlayer);
                     
                     // Whichever team gets the rebound gets to shoot the ball again
                     let teamShot = playerShoots(teamShooter(reboundTeam[0]));
@@ -453,6 +508,10 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
                 // If the team misses the shot then check to see what team gets the rebound
                 else{
                     let reboundTeam = teamRebound(visitorTeam, homeTeam);
+
+                    // Return index of player that rebounded and if Offensive of defensive
+                    let reboundPlayer = playerRebound(reboundTeam);
+                    addReboundStat('Visitor', reboundPlayer);
                     
                     // Whichever team gets the rebound gets to shoot the ball again
                     let teamShot = playerShoots(teamShooter(reboundTeam[0]));
@@ -514,7 +573,39 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
             }
         }
 
+        // Add the rebound stats to the player
+        function addReboundStat(team, player){
+            let currentTeam;
 
+            // player => [player index, off/def]
+            let playerIndex = player[0];
+            let possession = player[1];
+
+            // The team that got the rebound is on offense
+            if(possession === 'Offensive'){
+                // Change the current team getting the rebound depending on what side of the court the shot was on
+                if(team === 'Home'){
+                    currentTeam = gameStats[0];
+                }
+                else{
+                    currentTeam = gameStats[1];
+                }
+
+                currentTeam[playerIndex].offReb = currentTeam[playerIndex].offReb + 1;
+            }
+            // The team that got the rebound is on defense
+            else{
+                // Change the current team getting the rebound depending on what side of the court the shot was on
+                if(team === 'Visitor'){
+                    currentTeam = gameStats[0];
+                }
+                else{
+                    currentTeam = gameStats[1];
+                }
+
+                currentTeam[playerIndex].defReb = currentTeam[playerIndex].defReb + 1;
+            }
+        }
     }
 
     console.log('The home team scored ' + homeTeamScore + ' points!');
@@ -523,52 +614,86 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
     console.log('The home team shot ' + visitorTeamShots + ' times.');
 
     createMainTable(gameStats[0], gameStats[1]);
+    displayScoreWinner(homeTeamScore, visitorTeamScore, homeTeam, visitorTeam);
 };
 
-// Fill in the table for the stats of the current game
-function createMainTable(homeTeam, visitorTeam){
-    let homeTable = document.getElementById('main-table-home');
-    let visitorTable = document.getElementById('main-table-visitor');
-    let currentTeam;
-    let currentTable;
+function playerRebound(reboundTeam){
+    let currentTeam = reboundTeam[0];
+    let side = reboundTeam[1];
 
-    // Fill in both tables
-    for(let teamIndex=0; teamIndex<2; teamIndex++){
-        if(teamIndex === 0){
-            currentTeam = homeTeam;
-            currentTable = homeTable;
-        }else{
-            currentTeam = visitorTeam;
-            currentTable = visitorTable;
-        }
+    // Pick a random number 0 and 1000. Each players will cover a range of numbers between 1 and 1000 proportional to there chance to shoot
+    let randNumb = Math.floor(Math.random() * 1000);
+    let deciderArray = [];
 
-        let tableBody = currentTable.querySelector('tbody');
-
-        // Create a row for each player
-        for(let playerIndex=0; playerIndex<(currentTeam.length); playerIndex++){
-            let newRow = document.createElement('tr');
-
-            // Create a player name column and append to the player's row
-            let nameColumn = document.createElement('th');
-            nameColumn.setAttribute('scope', 'row');
-            nameColumn.textContent = currentTeam[playerIndex].name;
-            newRow.append(nameColumn);
-
-            // Create an array of the players stats
-            let currentPlayer = currentTeam[playerIndex]
-            let playerStats = [currentPlayer.points, (currentPlayer.made2 + currentPlayer.made3), (currentPlayer.att2 + currentPlayer.att3), currentPlayer.made3, currentPlayer.att3, (currentPlayer.offReb + currentPlayer.defReb)];
-            
-            // Create a column for each players stat
-            for(let statIndex=0; statIndex<6; statIndex++){
-                let statColumn = document.createElement('td');
-
-                // Add the stat column to the row being created
-                statColumn.textContent = playerStats[statIndex];
-                newRow.append(statColumn);
+    if(side === 'Offensive'){
+        for(let i=0; i<(currentTeam.length -1 ); i++){
+            if(i === 0){
+                deciderArray[i] = currentTeam[i].chanceOffReb * 1000;
             }
-
-            // Add the newly created row with its stats to the table
-            tableBody.append(newRow);
+            else{
+                deciderArray[i] = deciderArray[i-1] + currentTeam[i].chanceOffReb * 1000;
+            }
         }
+    }
+    else{
+        for(let i=0; i<(currentTeam.length -1 ); i++){
+            if(i === 0){
+                deciderArray[i] = currentTeam[i].chanceDefReb * 1000;
+            }
+            else{
+                deciderArray[i] = deciderArray[i-1] + currentTeam[i].chanceDefReb * 1000;
+            }
+        }
+    };
+
+    // Determine which player rebounded the ball and return their index and if off/def
+    const rebounder = () => {
+        switch (true) {
+            case (randNumb <= deciderArray[0]):
+                return [0, side];
+
+            case (randNumb <= deciderArray[1]):
+                return [1, side];
+
+            case (randNumb <= deciderArray[2]):
+                return [2, side];
+
+            case (randNumb <= deciderArray[3]):
+                return [3, side];
+
+            case (randNumb <= deciderArray[4]):
+                return [4, side];
+            }
+    }
+
+    return rebounder();
+}
+
+function displayScoreWinner(homeScore, visitorScore, homeTeam, visitorTeam){
+    // Change the team names displayed
+    let homeTeamDisplay = document.getElementsByClassName('home-team-name');
+    let visitorTeamDisplay = document.getElementsByClassName('visitor-team-name');
+    
+    homeTeamDisplay[0].textContent = homeTeam[(homeTeam.length - 1)].teamName;
+    visitorTeamDisplay[0].textContent = visitorTeam[(visitorTeam.length - 1)].teamName;
+
+    // Change the display score
+    let homeScoreDisplay = document.getElementsByClassName('home-team-score');
+    let visitorScoreDisplay = document.getElementsByClassName('visitor-team-score');
+
+    homeScoreDisplay[0].textContent = homeScore;
+    visitorScoreDisplay[0].textContent = visitorScore;
+
+    // Display the winner name and banner
+    let winningTeamDisplay = document.getElementsByClassName('winning-team-name');
+    let winnerBanner = document.getElementsByClassName('winning-banner');
+
+    if(homeScore > visitorScore){
+        winningTeamDisplay[0].textContent = homeTeam[(homeTeam.length - 1)].teamName;
+        winnerBanner[0].setAttribute('src', homeTeam[(homeTeam.length - 1)].imgURL);
+    }
+    else{
+        winningTeamDisplay[0].textContent = visitorTeam[(visitorTeam.length - 1)].teamName;
+        winnerBanner[0].setAttribute('src', visitorTeam[(visitorTeam.length - 1)].imgURL);
     }
 }
