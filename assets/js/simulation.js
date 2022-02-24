@@ -182,11 +182,11 @@ let clevelandCaveliers = [
     }
 ];
 
-// teamSeasonPercentage(goldenState);
-// teamSeasonPercentage(clevelandCaveliers);
+teamSeasonPercentage(goldenState);
+teamSeasonPercentage(clevelandCaveliers);
 
 // Run a game where each team shoots at minimum 1 shot per 1 minute... 3 chances to put up missed shots
-// runGame(goldenState, clevelandCaveliers, 1, 1, 3);
+runGame(goldenState, clevelandCaveliers, 1, 1, 3);
 
 // Establish each players 2pt% and 3pt% 
 function teamSeasonPercentage(currentTeam){
@@ -274,26 +274,24 @@ function teamShooter(currentTeam){
         switch (true) {
             case (randNumb <= deciderArray[0]):
                 curShoot = currentTeam[0];
-                return curShoot;
+                return [curShoot, 0];
 
             case (randNumb <= deciderArray[1]):
                 curShoot = currentTeam[1];
-                return curShoot;
+                return [curShoot, 1];
 
             case (randNumb <= deciderArray[2]):
                 curShoot = currentTeam[2];
-                return curShoot;
+                return [curShoot, 2];
 
             case (randNumb <= deciderArray[3]):
                 curShoot = currentTeam[3];
-                return curShoot;
+                return [curShoot, 3];
 
             case (randNumb <= deciderArray[4]):
                 curShoot = currentTeam[4];
-                return curShoot;
+                return [curShoot, 4];
             }
-
-        return curShoot;
     }
 
     return shooter();
@@ -302,21 +300,21 @@ function teamShooter(currentTeam){
 // Figure out if the player shoots a 2pt or 3 pt... does he make it or miss
 function playerShoots(currentPlayer){
     let randNumb = Math.floor(Math.random() * 1000);
-    let oddsTry2 = currentPlayer.chance2*1000;
+    let oddsTry2 = currentPlayer[0].chance2*1000;
 
     // Shoots a 2pt
     if(randNumb <= oddsTry2){
         // Get another random number to see if the player makes the shot
         randNumb = Math.floor(Math.random() * 1000);
 
-        let oddMake2 = currentPlayer.per2*1000;
+        let oddMake2 = currentPlayer[0].per2*1000;
 
         // Player makes the shot
         if(randNumb <= oddMake2){
-            return [2, true];
+            return [2, true, currentPlayer[1]];
         }
         else{
-            return [2, false];
+            return [2, false, currentPlayer[1]];
         }
     }
     // Shoots a 3pt
@@ -324,14 +322,14 @@ function playerShoots(currentPlayer){
         // Get another random number to see if the player makes the shot
         randNumb = Math.floor(Math.random() * 1000);
 
-        let oddMake3 = currentPlayer.per3*1000;
+        let oddMake3 = currentPlayer[0].per3*1000;
 
         // Player makes the shot
         if(randNumb <= oddMake3){
-            return [3, true];
+            return [3, true, currentPlayer[1]];
         }
         else{
-            return [3, false];
+            return [3, false, currentPlayer[1]];
         }
     }
 }
@@ -361,6 +359,38 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
     let homeTeamShots = 0;
     let visitorTeamShots = 0;
 
+    // Keep track of players stats for this specific game
+    let homeStats = [];
+    let visitorStats = [];
+
+    // Create empty objects for each player to store their game stats
+    for(let i=0; i<5; i++){
+        homeStats[i] = {
+            name: homeTeam[i].name,
+            points: 0,
+            made2: 0,
+            att2: 0,
+            made3: 0,
+            att3: 0,
+            offReb: 0,
+            defReb: 0
+        };
+
+        visitorStats[i] = {
+            name: visitorTeam[i].name,
+            points: 0,
+            made2: 0,
+            att2: 0,
+            made3: 0,
+            att3: 0,
+            offReb: 0,
+            defReb: 0
+        }
+    }
+
+    // Game stats stores each team player stats
+    let gameStats = [homeStats, visitorStats];
+
     // Get team percentages based on their opponent... chance to get rebounds
     playerGamePercentage(homeTeam, visitorTeam)
 
@@ -389,7 +419,10 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
 
             // Home team shot
             if(team === 'Home'){
+                addShotStat('Home', shotStatus);
+
                 if(shotStatus[1]){
+                    // homeTeamShots = homeTeamShots + 1;
                     homeTeamScore = homeTeamScore + shotStatus[0];
                 } 
                 // If the team misses the shot then check to see what team gets the rebound
@@ -408,11 +441,13 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
                         checkShotRedo('Visitor', teamShot, reshots);
                     }
                 }
-                homeTeamShots = homeTeamShots + 1;
             } 
             // Visitor team shot
             else {
+                addShotStat('Visitor', shotStatus);
+
                 if(shotStatus[1]){
+                    // visitorTeamShots = visitorTeamShots + 1;
                     visitorTeamScore = visitorTeamScore + shotStatus[0];
                 } 
                 // If the team misses the shot then check to see what team gets the rebound
@@ -432,15 +467,62 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
                     }
                 }
 
-                visitorTeamShots = visitorTeamShots + 1;
             }
         }
+
+        // Add the shooting stats to the player that just shot
+        function addShotStat(team, shotStatus){
+            // shotStatus => [point, boolean, playerIndex]
+
+            let currentTeam;
+
+            // Get the home team object out of the gameStats object
+            if(team === 'Home'){
+                currentTeam = gameStats[0];
+                homeTeamShots = homeTeamShots + 1;
+            }
+            else{
+                currentTeam = gameStats[1];
+                visitorTeamShots = visitorTeamShots + 1;
+            }
+
+            // Grab the current player that is shooting
+            let currentPlayer = currentTeam[shotStatus[2]];
+
+            // Check if the player shot a 2 or a 3 and add it to attempted shots
+            // Shoots a 2
+            if(shotStatus[0] === 2){
+                currentPlayer.att2 = currentPlayer.att2 + 1;
+
+                // If the player made the shot then add 2 points to stats
+                if(shotStatus[1]){
+                    currentPlayer.made2 = currentPlayer.made2 + 1;
+                    currentPlayer.points = currentPlayer.points + 2;
+                    return;
+                }
+            }
+            // Shoots a 3
+            else{
+                currentPlayer.att3 = currentPlayer.att3 + 1;
+
+                // If the player made the shot then add 2 points to stats
+                if(shotStatus[1]){
+                    currentPlayer.made3 = currentPlayer.made3 + 1;
+                    currentPlayer.points = currentPlayer.points + 3;
+                    return;
+                }
+            }
+        }
+
+
     }
 
     console.log('The home team scored ' + homeTeamScore + ' points!');
     console.log('The visitor team scored ' + visitorTeamScore + ' points!');
     console.log('The home team shot ' + homeTeamShots + ' times.');
     console.log('The home team shot ' + visitorTeamShots + ' times.');
+
+    createMainTable(gameStats[0], gameStats[1]);
 };
 
 // Fill in the table for the stats of the current game
@@ -463,7 +545,7 @@ function createMainTable(homeTeam, visitorTeam){
         let tableBody = currentTable.querySelector('tbody');
 
         // Create a row for each player
-        for(let playerIndex=0; playerIndex<(currentTeam.length - 1); playerIndex++){
+        for(let playerIndex=0; playerIndex<(currentTeam.length); playerIndex++){
             let newRow = document.createElement('tr');
 
             // Create a player name column and append to the player's row
@@ -474,7 +556,7 @@ function createMainTable(homeTeam, visitorTeam){
 
             // Create an array of the players stats
             let currentPlayer = currentTeam[playerIndex]
-            let playerStats = [currentPlayer.att2, (currentPlayer.made2 + currentPlayer.made3), (currentPlayer.att2 + currentPlayer.att3), currentPlayer.made3, currentPlayer.att3, currentPlayer.defReb]
+            let playerStats = [currentPlayer.points, (currentPlayer.made2 + currentPlayer.made3), (currentPlayer.att2 + currentPlayer.att3), currentPlayer.made3, currentPlayer.att3, (currentPlayer.offReb + currentPlayer.defReb)];
             
             // Create a column for each players stat
             for(let statIndex=0; statIndex<6; statIndex++){
@@ -490,5 +572,3 @@ function createMainTable(homeTeam, visitorTeam){
         }
     }
 }
-
-createMainTable(goldenState, clevelandCaveliers);
