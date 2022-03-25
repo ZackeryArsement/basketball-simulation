@@ -1,0 +1,78 @@
+.background{
+    height: 100vh;
+    background-color: var(--lightBrown);
+    background-image: url("https://transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+.barrier{
+    height: 9rem;
+}
+
+.formCard{
+    color: black;
+    margin: 0 auto;
+    text-align: center;
+    width: 700px;
+    border-radius: 10px;
+    background-color: var(--deepBlue);
+    box-shadow: 5px 5px 10px var(--deepBrown);
+}
+
+.title{
+    font-size: 3rem;
+    padding: 1rem;
+    text-shadow: 1px 1px 4px var(--lightBlue);
+}
+
+.loginBtn{
+    color: black;
+    font-weight: 500;
+    width: 50%;
+    border: none;
+    border-bottom: 2px solid black;
+    border-right: 1px solid black;
+    background: linear-gradient(to top, var(--softBlue), var(--deepBlue) 95%);
+    padding: 1rem;
+    font-size: 2rem;
+    text-shadow: 2px 2px 3px var(--lightBlue);
+}
+.signupBtn{
+    color: black;
+    font-weight: 500;
+    width: 50%;
+    border: none;
+    border-bottom: 2px solid black;
+    border-left: 1px solid black;
+    background: linear-gradient(to top, var(--softBlue), var(--deepBlue) 95%);
+    padding: 1rem;
+    font-size: 2rem;
+    text-shadow: 2px 2px 3px var(--lightBlue);
+}
+
+@media screen and (max-width: 700px) {
+    .barrier{
+        height: 0;
+    }
+    
+    .formCard{
+        margin: 0 auto;
+        width: 95%;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        box-shadow: 5px 5px 10px var(--deepBrown);
+    }
+    
+    .title{
+        padding: 0;
+        text-shadow: 1px 1px 4px var(--lightBlue);
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .formCard{
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+    }
+}

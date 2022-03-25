@@ -1,7 +1,7 @@
-import GSWBanner from '../../assets/images/GSW.jpg';
+import GSWBanner from '../assets/images/GSW.jpg';
 import { useState, useEffect } from 'react';
 
-const MainPage = () => {
+const HomePage = () => {
     const [homeGameStats, setHomePlayers] = useState([]);
     const [awayGameStats, setAwayPlayers] = useState([]);
 
@@ -115,4 +115,4 @@ const MainPage = () => {
         </div>
     )}
 
-export default MainPage;
+export default HomePage;

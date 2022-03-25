@@ -1,0 +1,102 @@
+[
+    {
+        "name": "Steph Curry",
+        "twoAttempts": 9,
+        "threeAttempts": 11.2,
+        "twosMade": 5.1,
+        "threesMade": 5.1,
+        "offensiveRebounds": 0.9,
+        "defensiveRebounds": 4.6,
+        "assists": 5
+    },
+    {
+        "name": "Draymond Green",
+        "twoAttempts": 6.9,
+        "threeAttempts": 3.2,
+        "twosMade": 3.7,
+        "threesMade": 1.2,
+        "offensiveRebounds": 1.7,
+        "defensiveRebounds": 7.8,
+        "assists": 5
+    },
+    {
+        "name": "Klay Thompson",
+        "twoAttempts": 9.2,
+        "threeAttempts": 8.1,
+        "twosMade": 4.7,
+        "threesMade": 2.5,
+        "offensiveRebounds": 0.4,
+        "defensiveRebounds": 3.4,
+        "assists": 5
+    },
+    {
+        "name": "Andre Iguodala",
+        "twoAttempts": 3.3,
+        "threeAttempts": 2.4,
+        "twosMade": 1.9,
+        "threesMade": 0.8,
+        "offensiveRebounds": 0.8,
+        "defensiveRebounds": 3.2,
+        "assists": 5
+    },
+    {
+        "name": "Harrison Barnes",
+        "twoAttempts": 6.3,
+        "threeAttempts": 3.2,
+        "twosMade": 3.2,
+        "threesMade": 1.2,
+        "offensiveRebounds": 1.2,
+        "defensiveRebounds": 3.8,
+        "assists": 5
+    },
+    {
+        "name": "Lebron James",
+        "twoAttempts": 14.9,
+        "threeAttempts": 3.7,
+        "twosMade": 8.6,
+        "threesMade": 1.1,
+        "offensiveRebounds": 1.5,
+        "defensiveRebounds": 6,
+        "assists": 5
+    },
+    {
+        "name": "Kyrie Irving",
+        "twoAttempts": 11.6,
+        "threeAttempts": 4.9,
+        "twosMade": 5.8,
+        "threesMade": 1.6,
+        "offensiveRebounds": 0.8,
+        "defensiveRebounds": 2.1,
+        "assists": 5
+    },
+    {
+        "name": "Kevin Love",
+        "twoAttempts": 7,
+        "threeAttempts": 5.7,
+        "twosMade": 3.3,
+        "threesMade": 2.1,
+        "offensiveRebounds": 1.9,
+        "defensiveRebounds": 8,
+        "assists": 5
+    },
+    {
+        "name": "J.R. Smith",
+        "twoAttempts": 4.4,
+        "threeAttempts": 6.6,
+        "twosMade": 1.9,
+        "threesMade": 2.6,
+        "offensiveRebounds": 0.6,
+        "defensiveRebounds": 2.3,
+        "assists": 5
+    },
+    {
+        "name": "Tristan Thompson",
+        "twoAttempts": 5.1,
+        "threeAttempts": 0,
+        "twosMade": 3,
+        "threesMade": 0,
+        "offensiveRebounds": 3.3,
+        "defensiveRebounds": 5.7,
+        "assists": 5
+    }
+]
