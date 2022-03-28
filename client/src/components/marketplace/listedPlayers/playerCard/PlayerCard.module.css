@@ -1,0 +1,141 @@
+.playerCards{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.card{
+    width: 25rem;
+    height: 25rem;
+    margin: 2rem 3rem;
+    background-color: var(--lightBrown);
+    border-radius: 15px;
+}
+
+/* Card Grid */
+
+.topRow{
+    display: flex;
+}
+
+.topLeft{
+    width: 33%;
+}
+
+.topRight{
+    width: 67%;
+}
+
+
+/* Top Left Column */
+.title{
+    width: 94%;
+    margin: 1rem 3%;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: black solid 2px;
+    height: 4.5rem;
+}
+
+.score{
+    font-size: 2rem;
+    text-align: center;
+}
+
+.description{
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.draftBtn{
+    width: 90%;
+    margin: 1rem 5%;
+    font-size: 1.5rem;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+
+    border-radius: 10px;
+}
+
+/* Top Right Column */
+.image{
+    width: 92%;
+    height: 15rem;
+    margin: 1rem 4%;
+    background-color: var(--tan);
+    border-radius: 10px;
+}
+
+/* Stats Row */
+
+.stats{
+    font-size: 1.2rem;
+    display: flex;
+    background-color: beige;
+    margin: 0 5%;
+    border-radius: 10px;
+}
+
+.leftStats{
+    width: 50%;
+    margin: 0.5rem 0;
+    padding: 0 1.5%;
+}
+
+.rightStats{
+    width: 50%;
+    margin: 0.5rem 0;
+    padding: 0 1.5%;
+}
+
+
+/* Stats */
+.points{
+    margin: 1.5% 0;
+    padding-left: 4%;
+    border-radius: 10px;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+}
+
+.rebounds{
+    margin: 1.5% 0;
+    padding-left: 4%;
+    border-radius: 10px;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+}
+
+.assists{
+    margin: 1.5% 0;
+    padding-left: 4%;
+    border-radius: 10px;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+}
+
+.attempts{
+    margin: 1.5% 0;
+    padding-left: 4%;
+    border-radius: 10px;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+}
+
+.percentages{
+    margin: 1.5% 0;
+    padding-left: 4%;
+    border-radius: 10px;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+}
+
+.freeThrows{
+    margin: 1.5% 0;
+    padding-left: 4%;
+    border-radius: 10px;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+}

@@ -11,9 +11,9 @@ query user {
 }
 `
 
-export const QUERY_PLAYER = gql`
-query player {
-    player {
+export const QUERY_PLAYERS = gql`
+query players {
+    players {
         _id
         userId
         name
@@ -24,6 +24,12 @@ query player {
         offensiveRebounds
         defensiveRebounds
         assists
+        twoPercentage
+        threePercentage
+        attemptTwoPercentage
+        attemptThreePercentage
+        pointsPerGame
+        totalRebounds
     }
 }
 `

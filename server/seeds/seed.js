@@ -11,9 +11,11 @@ db.once('open', async () => {
     
     await User.deleteMany({});
 
-    await Player.create(playerSeeds);
+    const play = await Player.create(playerSeeds);
 
     await User.create(userSeeds);
+
+    console.log(play);
 
   } catch (err) {
     console.error(err);

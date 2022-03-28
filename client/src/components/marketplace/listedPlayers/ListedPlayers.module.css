@@ -1,0 +1,5 @@
+.listedPlayers{
+    background-color: var(--tan);
+    margin-top: 6rem;
+    justify-content: center;
+}

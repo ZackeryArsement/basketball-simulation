@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import classes from './LoginSignup.module.css'
 
-import Login from "../components/loginSignup/Login"
-import Signup from "../components/loginSignup/Signup"
+import Login from "../components/loginSignup/login/Login"
+import Signup from "../components/loginSignup/signup/Signup"
 
 import { useMutation } from "@apollo/client";
 import Auth from "../components/utils/auth"

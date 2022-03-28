@@ -20,6 +20,12 @@ type Player {
     offensiveRebounds: Float
     defensiveRebounds: Float
     assists: Float
+    twoPercentage: Float
+    threePercentage: Float
+    attemptTwoPercentage: Float
+    attemptThreePercentage: Float
+    pointsPerGame: Float
+    totalRebounds: Float
 }
 
 type Game {

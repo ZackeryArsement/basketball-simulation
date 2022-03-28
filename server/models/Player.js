@@ -40,7 +40,7 @@ const playerSchema = new Schema({
     }
 },
 {
-    toJSON: {
+    toObject: {
         virtuals: true,
     },
 
@@ -49,21 +49,55 @@ const playerSchema = new Schema({
 
 playerSchema.virtual('twoPercentage').get(function () {
     let numb = this.twosMade / this.twoAttempts;
+
+    numb = Math.round(numb * 1000)/1000;
+
     return numb;
 });
 
 playerSchema.virtual('threePercentage').get(function () {
-    let numb = this.threesMade / this.threeAttempts;
+    let numb;
+    
+    if(this.threeAttempts > 0){
+        numb = this.threesMade / this.threeAttempts;
+    }else{
+        numb = 0;
+    }
+
+    numb = Math.round(numb * 1000)/1000;
+
     return numb;
 });
 
 playerSchema.virtual('attemptTwoPercentage').get(function () {
     let numb = this.twoAttempts / (this.twoAttempts + this.threeAttempts);
+
+    numb = Math.round(numb * 1000)/1000;
+
     return numb;
 });
 
 playerSchema.virtual('attemptThreePercentage').get(function () {
     let numb = this.threeAttempts / (this.twoAttempts + this.threeAttempts);
+
+    numb = Math.round(numb * 1000)/1000;
+
+    return numb;
+});
+
+playerSchema.virtual('pointsPerGame').get(function () {
+    let numb = this.threesMade*3 + this.twosMade*2;
+
+    numb = Math.round(numb * 10000)/10000;
+
+    return numb;
+});
+
+playerSchema.virtual('totalRebounds').get(function () {
+    let numb = this.offensiveRebounds + this.defensiveRebounds;
+
+    numb = Math.round(numb * 10000)/10000;
+
     return numb;
 });
 

@@ -10,7 +10,6 @@ import Gif from '../../assets/images-2/navbar/gif.gif'
 import Auth from '../../components/utils/auth'
 
 const Navbar = () => {
-    console.log(Auth.getProfile())
     return(
         <div className={classes.navbar}>
             <div className={classes.leftNav}>
