@@ -69,10 +69,14 @@
     }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 320px) {
     .formCard{
         width: 100%;
         box-shadow: none;
         border-radius: 0;
+    }
+
+    .signupBtn{
+        font-size: 1.75rem;
     }
 }

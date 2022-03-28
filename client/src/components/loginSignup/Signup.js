@@ -5,7 +5,7 @@ const Signup = (props) => {
         <div className={classes.form}>
             <div>
                 <h2 className={classes.title}>Sign Up Below</h2>
-                <div className={classes.inputsColumn}>
+                <div>
 
                     <div>
                         <input className={classes.input} type="text" placeholder='Username' name="username" value={props.usernameInput} onChange={props.setUsernameInput}/>
@@ -14,7 +14,7 @@ const Signup = (props) => {
 
                     <div>
                         <input className={classes.input} type="password" placeholder='Password' name="password" value={props.passwordInput} onChange={props.setPasswordInput}/>
-                        <input className={classes.input} type="password" placeholder='Confirm Password' name="confirmPassword" value={props.passwordConfirmInput} onChange={props.setPasswordConfirmInput}/>
+                        {/* <input className={classes.input} type="password" placeholder='Confirm Password' name="confirmPassword" value={props.passwordConfirmInput} onChange={props.setPasswordConfirmInput}/> */}
                     </div>
                 </div>
             </div>

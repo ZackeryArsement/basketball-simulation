@@ -9,7 +9,7 @@ import Auth from "../components/utils/auth"
 import { ADD_USER } from "../components/utils/mutations";
 import { LOGIN_USER } from "../components/utils/mutations";
 
-const LoginSignup = () => {
+const LoginSignup = (props) => {
     const [formState, setFormState] = useState({ username: "", password: "" });
     const [toggleForm, setToggleForm] = useState('Login');
     const [addUser] = useMutation(ADD_USER);
@@ -17,14 +17,15 @@ const LoginSignup = () => {
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        // console.log(formState);
+        console.log(formState);
         try {
           if (
             formState.username &&
             formState.password &&
             formState.email
           ) {
-     
+            console.log("sign up")
+
             const mutationResponse = await addUser({
               variables: {
                 username: formState.username,
@@ -32,15 +33,18 @@ const LoginSignup = () => {
                 email: formState.email,
               },
             });
+
+            console.log(mutationResponse);
     
             const token = mutationResponse.data.addUser.token;
             Auth.login(token);
     
           } else {
-              
+            console.log("log in")
             const mutationResponse = await login({
               variables: { username: formState.username, password: formState.password },
             });
+
             const token = mutationResponse.data.login.token;
             Auth.login(token);
           }
@@ -57,10 +61,6 @@ const LoginSignup = () => {
           [name]: value,
         });
       };
-    
-    const changeForm = () => {
-
-    }
 
     useEffect(() =>{
 
@@ -77,21 +77,22 @@ const LoginSignup = () => {
                         <button className={classes.signupBtn} onClick={() => setToggleForm("Signup")}>Sign up</button>
                 </div>
 
-                {toggleForm === "Login"
-                ? (
-                    <Login
-                    setUsernameInput={handleChange}
-                    setPasswordInput={handleChange}
-                    />
-                ) : (
-                    <Signup
-                    setUsernameInput={handleChange}
-                    setEmailInput={handleChange}
-                    setPasswordInput={handleChange}
-                    setPasswordConfirmInput={handleChange}
-                    />  
-                )
-            }
+                <form  onSubmit={submitHandler}>
+                    {toggleForm === "Login"
+                    ? (
+                        <Login
+                        setUsernameInput={handleChange}
+                        setPasswordInput={handleChange}
+                        />
+                    ) : (
+                        <Signup
+                        setUsernameInput={handleChange}
+                        setEmailInput={handleChange}
+                        setPasswordInput={handleChange}
+                        setPasswordConfirmInput={handleChange}
+                        />  
+                    )}
+                </form>
             </div>
         </div>
         
