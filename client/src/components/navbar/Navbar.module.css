@@ -1,0 +1,205 @@
+.navbar{
+    height: 6rem;
+    background: linear-gradient(var(--softBlue), var(--deepBlue));
+}
+
+.basketball{
+    background-color: var(--deepOrange);
+    border-radius: 50%;
+    width: 5rem;
+    margin: 0.5rem 1rem;
+}
+
+.basketball:hover{
+    box-shadow: 0 0 15px 5px var(--lightOrange);
+}
+
+.rightNav{
+    display: flex;
+    position: absolute;
+    right: 0;
+    height: 6rem;
+}
+
+.leftNav{
+    position: absolute;
+    left: 0;
+}
+/* Court Icon */
+.court{
+    position: relative;
+    border-radius: 10px;
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--lightBrown);
+    margin: 0.5rem 1rem;
+}
+
+.innerCourt{
+    position: absolute;
+    border-radius: 10px;
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: var(--lightBlue);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.innerCourt:hover{
+    box-shadow: 0 0 15px 5px var(--lightBrown);
+}
+
+/* MarketPlace Icon */
+.moneybag{
+    position: relative;
+    border-radius: 10px;
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--lightOrange);
+    margin: 0.5rem 1rem;
+}
+
+.innerMoneybag{
+    position: absolute;
+    border-radius: 10px;
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: var(--tan);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.innerMoneybag:hover{
+    box-shadow: 0 0 15px 5px var(--lightOrange);
+}
+
+
+/* Profile Icon */
+.username{
+    position: relative;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    margin: 0.5rem 1rem;
+    color: black;
+    background-color: var(--lightBlue);
+}
+
+.innerUsername{
+    position: absolute;
+    background-color: var(--softBlue);
+    border-radius: 50%;
+    width: 4.66rem;
+    height: 4.66rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.innerUsername:hover{
+    box-shadow: 0 0 15px 5px var(--lightBlue);
+}
+
+.letter{
+    position: absolute;
+    font-size: 4rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: -0.25rem;
+}
+
+@media screen and (max-width: 450px) {
+    /* Court Icon */
+    .court{
+        width: 4rem;
+        height: 4rem;
+        margin: 1rem 0.5rem;
+    }
+
+    .innerCourt{
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    /* MarketPlace Icon */
+    .moneybag{
+        width: 4rem;
+        height: 4rem;
+        margin: 1rem 0.5rem;
+    }
+
+    .innerMoneybag{
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    /* Profile Icon */
+    .username{
+        width: 4rem;
+        height: 4rem;
+        margin: 1rem 0.5rem;
+    }
+    
+    .innerUsername{
+        width: 3.66rem;
+        height: 3.66rem;
+    }
+    .letter{
+        position: absolute;
+        font-size: 3.5rem;
+        margin-top: -0.25rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .basketball{
+        background-color: var(--deepOrange);
+        border-radius: 50%;
+        width: 4.25rem;
+        margin: 0.75rem 0.5rem;
+    }
+
+    /* Court Icon */
+    .court{
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 1rem 0.33rem;
+    }
+
+    .innerCourt{
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+
+    /* MarketPlace Icon */
+    .moneybag{
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 1rem 0.33rem;
+    }
+
+    .innerMoneybag{
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+
+    /* Profile Icon */
+    .username{
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 1rem 0.33rem;
+    }
+    
+    .innerUsername{
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+    .letter{
+        position: absolute;
+        font-size: 3rem;
+        margin-top: -0.25rem;
+    }
+}

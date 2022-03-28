@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 // import classes from './App.module.css'
+import Navbar from './components/navbar/Navbar';
+
 import HomePage from './pages/HomePage';
 import LoginSignup from './pages/LoginSignup';
 import Profile from './pages/Profile';
@@ -57,6 +59,8 @@ function App() {
           <ApolloProvider client={client}>
             <Router>
               <main>
+                <Navbar />
+                
                 <Routes>
                   
                   {/* Homepage Route */}
