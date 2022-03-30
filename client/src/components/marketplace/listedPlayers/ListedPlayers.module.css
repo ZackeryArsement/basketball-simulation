@@ -1,5 +1,6 @@
 .listedPlayers{
+    display: flex;
+    flex-wrap: wrap;
     background-color: var(--tan);
     margin-top: 6rem;
-    justify-content: center;
 }

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import Basketball from '../../assets/images-2/navbar/basketball.png'
 import MoneyBag from '../../assets/images-2/navbar/money-bag-large.png'
 import Court from '../../assets/images-2/navbar/basketball-court.png'
-import Gif from '../../assets/images-2/navbar/gif.gif'
 
 import Auth from '../../components/utils/auth'
 
@@ -14,17 +13,17 @@ const Navbar = () => {
         <div className={classes.navbar}>
             <div className={classes.leftNav}>
                 <Link to="/">
-                    <img src={Basketball} className={classes.basketball}/>
+                    <img src={Basketball} className={classes.basketball} alt='Homepage Icon'/>
                 </Link>
             </div>
             <div className={classes.rightNav}>
                 <div className={classes.court}>
-                    <img src={Court} className={classes.innerCourt}/>
+                    <img src={Court} className={classes.innerCourt} alt='Play Icon'/>
                 </div>
 
                 <Link to="/marketplace">
                     <div className={classes.moneybag}>
-                        <img src={MoneyBag} className={classes.innerMoneybag}/>
+                        <img src={MoneyBag} className={classes.innerMoneybag} alt='Marketplace Icon'/>
                     </div>
                 </Link>
 
@@ -45,4 +44,4 @@ const Navbar = () => {
 export default Navbar;
 
 // Gif
-{/* <a href="https://www.flaticon.com/free-icons/basketball-court" title="basketball court icons">Basketball court icons created by Freepik - Flaticon</a> */}
+/* <a href="https://www.flaticon.com/free-icons/basketball-court" title="basketball court icons">Basketball court icons created by Freepik - Flaticon</a> */

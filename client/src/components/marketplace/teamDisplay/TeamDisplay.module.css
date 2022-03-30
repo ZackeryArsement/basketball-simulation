@@ -1,0 +1,47 @@
+.teamDisplay{
+    background-color: var(--deepBrown);
+    height: 75vh;
+    padding-top: 1rem;
+}
+
+.finalizeBtn{
+    width: 75%;
+    margin: 0 12.5%;
+    padding: 1rem;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    border-bottom: black solid 3px;
+    border-right: black solid 3px;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.playerDisplay{
+    display: flex;
+    width: 95%;
+    background-color: var(--tan);
+    margin: 1rem auto;
+    padding: 1rem 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.releaseBtn{
+    border-radius: 10px;
+    width: 25%;
+    outline: none;
+    border: none;
+}
+
+.stat{
+    margin: 0 0.25rem;
+    font-weight: 500;
+    padding: 0;
+}
+
+.name{
+    font-weight: 500;
+    font-size: 1.05rem;
+    margin: 0;
+}

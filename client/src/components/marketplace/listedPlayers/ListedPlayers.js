@@ -1,28 +1,21 @@
 import classes from './ListedPlayers.module.css'
-import { useEffect, useState } from 'react';
 
 import PlayerCard from './playerCard/PlayerCard';
 
-// Database Imports
-import { useQuery } from '@apollo/client'
-import { QUERY_PLAYERS } from '../../utils/queries';
-
-const ListedPlayers = () => {
-
-    const { loading, data } = useQuery(QUERY_PLAYERS);
-    const [players, setPlayers] = useState([]);
-
-    useEffect(()=>{
-        if(!loading){
-            console.log(data.players)
-            setPlayers(data.players)
-        }
-    }, [data])
+const ListedPlayers = ({ players, team, signPlayer, releasePlayer }) => {
 
     return(
         <div className={classes.listedPlayers}>
             {players !== [] ?
-                <PlayerCard players={players} />
+                players.map((player, index) => (
+                    <PlayerCard 
+                        player={player} 
+                        index={index} 
+                        team={team} 
+                        signPlayer={signPlayer}
+                        releasePlayer={releasePlayer}
+                        key={player._id}/>
+                ))
                 : null 
             }
         </div>

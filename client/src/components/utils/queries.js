@@ -33,3 +33,28 @@ query players {
     }
 }
 `
+
+export const QUERY_USER_TEAM = gql `
+query userTeam {
+    userTeam {
+        team{
+            _id
+            userId
+            name
+            twoAttempts
+            threeAttempts
+            twosMade
+            threesMade
+            offensiveRebounds
+            defensiveRebounds
+            assists
+            twoPercentage
+            threePercentage
+            attemptTwoPercentage
+            attemptThreePercentage
+            pointsPerGame
+            totalRebounds
+        }
+    }
+}
+`

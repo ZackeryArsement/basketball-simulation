@@ -1,11 +1,21 @@
+import { useEffect, useState } from 'react';
 import classes from './PlayerCard.module.css'
 
-const PlayerCard = ( players ) => {
+const PlayerCard = ( { player, index, team, signPlayer, releasePlayer } ) => {
+    const [selected, setSelected] = useState(false);
+
+    useEffect(() => {
+        if(team.filter(currentPlayer => currentPlayer._id === player._id).length > 0){
+            setSelected(true);
+        } else {
+            setSelected(false);
+        }
+
+    }, [team])
 
     return(
         <div className={classes.playerCards}>
-            {players.players.map((player, index)=> (
-                <div className={classes.card} key={index}>
+                <div className={classes.card} style={selected ? {backgroundColor: 'gray'} : {backgroundColor: 'var(--lightBrown)'}}>
                     
                     {/* Top row of player card */}
                     <div className={classes.topRow}>
@@ -24,7 +34,7 @@ const PlayerCard = ( players ) => {
                                 Salary
                             </div>
 
-                            <button className={classes.draftBtn}>Draft</button>
+                            <button className={classes.draftBtn} onClick={!selected ? signPlayer : releasePlayer} value={player._id}>Draft</button>
                         </div>
 
                         {/* Right column of top row */}
@@ -69,7 +79,6 @@ const PlayerCard = ( players ) => {
  
                     </div>  
                 </div>
-            ))}
         </div>
     )
 }

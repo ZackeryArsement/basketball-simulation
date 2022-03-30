@@ -35,9 +35,14 @@ export const RECRUIT_PLAYER = gql`
 mutation recruitPlayer($id: String!){
     recruitPlayer(id: $id){
         _id
-        user {
-            _id
-        }
     }
+}
+`;
+
+export const CLEAR_TEAM = gql`
+mutation clearTeam($id: String!){
+  clearTeam(id: $id){
+    _id
+  }
 }
 `
