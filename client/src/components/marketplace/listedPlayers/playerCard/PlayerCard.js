@@ -5,7 +5,7 @@ const PlayerCard = ( { player, index, team, signPlayer, releasePlayer } ) => {
     const [selected, setSelected] = useState(false);
 
     useEffect(() => {
-        if(team.filter(currentPlayer => currentPlayer._id === player._id).length > 0){
+        if(team.filter(currentPlayer => currentPlayer.name === player.name).length > 0){
             setSelected(true);
         } else {
             setSelected(false);

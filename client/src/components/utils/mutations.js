@@ -25,16 +25,34 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        
       }
     }
   }
 `;
 
 export const RECRUIT_PLAYER = gql`
-mutation recruitPlayer($id: String!){
-    recruitPlayer(id: $id){
-        _id
+mutation recruitPlayer($id: String!, $name: String!){
+    recruitPlayer(id: $id, name: $name){
+      team{
+        userId
+        playerStat{
+          _id
+          twoAttempts
+          threeAttempts
+          twosMade
+          threesMade
+          offensiveRebounds
+          defensiveRebounds
+          assists
+          twoPercentage
+          threePercentage
+          attemptTwoPercentage
+          attemptThreePercentage
+          pointsPerGame
+          totalRebounds
+        }
+        name
+      }
     }
 }
 `;

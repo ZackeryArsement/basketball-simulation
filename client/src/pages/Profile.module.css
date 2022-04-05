@@ -1,0 +1,13 @@
+.records{
+    display: flex;
+}
+
+.playerRecords{
+    width: 50%;
+    background-color: bisque;
+}
+
+.userRecords{
+    width: 50%;
+    background-color: rgb(120, 83, 37);
+}

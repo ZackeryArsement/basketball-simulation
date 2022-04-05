@@ -617,14 +617,15 @@ function runGame(homeTeam, visitorTeam, itShots, itMin, allowedReshots){
         }
     }
 
-    // console.log('The home team scored ' + homeTeamScore + ' points!');
-    // console.log('The visitor team scored ' + visitorTeamScore + ' points!');
+    console.log('The home team scored ' + homeTeamScore + ' points!');
+    console.log('The visitor team scored ' + visitorTeamScore + ' points!');
     // console.log('The home team shot ' + homeTeamShots + ' times.');
     // console.log('The home team shot ' + visitorTeamShots + ' times.');
 
-    createMainTable(gameStats[0], gameStats[1]);
-    displayScoreWinner(homeTeamScore, visitorTeamScore, homeTeam, visitorTeam);
+    // createMainTable(gameStats[0], gameStats[1]);
+    // displayScoreWinner(homeTeamScore, visitorTeamScore, homeTeam, visitorTeam);
     // console.log(homeTeam)
+    console.log(gameStats)
 };
 
 function playerRebound(reboundTeam){

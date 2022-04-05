@@ -5,13 +5,37 @@ type User {
     _id: ID
     username: String
     email: String
-    team: [Player]
+    team: [UserPlayer]
 }
 
 type Player {
     _id: ID
-    userId: String
     name: String
+    twoAttempts: Float
+    threeAttempts: Float
+    twosMade: Float
+    threesMade: Float
+    offensiveRebounds: Float
+    defensiveRebounds: Float
+    assists: Float
+    twoPercentage: Float
+    threePercentage: Float
+    attemptTwoPercentage: Float
+    attemptThreePercentage: Float
+    pointsPerGame: Float
+    totalRebounds: Float
+}
+
+type UserPlayer {
+    _id: ID
+    userId: String
+    playerStat: Player
+    name: String
+    gameStats: [GameStat]
+}
+
+type GameStat {
+    _id: ID
     twoAttempts: Float
     threeAttempts: Float
     twosMade: Float
@@ -49,13 +73,14 @@ type Query {
     user(username: String!): User
     users: [User]
     players: [Player]
+    player: Player
     userTeam: User
 }
 
 type Mutation {
     addUser(username: String!, password: String!, email: String!): Auth
     login(username: String!, password: String!): Auth
-    recruitPlayer(id: String!) : User
+    recruitPlayer(id: String!, name: String!) : User
     clearTeam(id: String!) : User
 }
 `

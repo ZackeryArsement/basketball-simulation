@@ -1,0 +1,24 @@
+.row{
+    display: flex;
+}
+
+.name{
+    width: 13rem;
+    font-size: 1.5rem;
+    /* background-color: aqua; */
+    border-bottom: var(--deepBlue) solid 2px;
+}
+
+.statSection{
+    display: flex;
+    flex-grow: 1;
+}
+
+.stat{
+    width: 9.09%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.15rem;
+    border-left: var(--deepBlue) solid 2px;
+    border-bottom: var(--deepBlue) solid 2px;
+}

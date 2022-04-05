@@ -55,13 +55,14 @@ const Marketplace = () => {
                 
                 const mapTeam = async () => {
                     await team.map((player) => {
+                        // console.log(player)
                         recruitPlayer({
                             variables: {
-                                id: player._id
+                                id: player._id,
+                                name: player.name
                             }
                         })
                     })
-                    console.log('hit')
                 }
                 await mapTeam();
             } catch (err){
@@ -84,6 +85,7 @@ const Marketplace = () => {
         if(!loadingT && team.length === 0){
             await refetch();
             setTeam(dataT.userTeam.team)
+            console.log(dataT.userTeam.team)
         }
     }, [loadingT])
 

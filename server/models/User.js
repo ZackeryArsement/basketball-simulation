@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const Player = require('./Player')
+const UserPlayer = require('./UserPlayer')
 const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
@@ -22,7 +22,7 @@ const userSchema = new Schema({
   },
   team: [{
     type: Schema.Types.ObjectId,
-    ref: 'Player'
+    ref: 'UserPlayer'
   }],
 });
 

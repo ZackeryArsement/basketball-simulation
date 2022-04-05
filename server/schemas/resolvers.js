@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Task, Stat, Player} = require("../models");
+const { User, Game, GameStat, Season, Player, UserPlayer} = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -13,10 +13,18 @@ const resolvers = {
         players: async () => {
             return Player.find();
         },
+        // player: async (parent, { name }, context) => {
+        //     return Player.findOne({ name: name, userId: context.user._id });
+        // },
         userTeam: async (parent, args, context) => {
             if (context.user){
-                let team = await User.findById({_id: context.user._id}).populate('team')
-                console.log(team)
+                let team = await User.findById({_id: context.user._id}).populate({
+                    path: 'team',
+                    populate: {
+                        path: 'playerStat',
+                        model: 'Player'
+                    }
+                })
                 return team
             }
 
@@ -47,18 +55,32 @@ const resolvers = {
       
             return { token, user };
         },
-        recruitPlayer: async (parent, { id }, context) => {
-            const player = await Player.findOneAndUpdate( 
-                {_id: id},
-                { $set: { userId: context.user._id} },
+        recruitPlayer: async (parent, { id, name }, context) => {
+            const player = await Player.findOne({ _id: id });
 
-                );
+            const userP = async () => {
+                let UP = await UserPlayer.findOne(
+                    { userId: context.user._id, playerStat: player, name: name },
+                    );
+
+                if(UP !== null){
+                    return UP;
+                } else{
+                    return await UserPlayer.create(
+                        { userId: context.user._id, playerStat: player, name: name },
+                        { new: true }
+                        );
+                }
+            }
+
+            const userPlayer = await userP();
+            console.log(userPlayer);
+
             const user = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { team: player }},
+                { $addToSet: { team: userPlayer }},
                 { new: true }
             )
-            console.log('hit recruit')
             return user
         },
         clearTeam: async (parent, { id }, context) => {
@@ -67,7 +89,6 @@ const resolvers = {
                 { $set: { team: [] }},
                 { new: true }
             )
-            console.log('Cleared')
             return user
         },
     },

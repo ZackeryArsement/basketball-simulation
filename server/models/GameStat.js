@@ -1,10 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const playerSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
+const gameStatSchema = new Schema({
     twoAttempts: {
         type: Number,
         required: true,
@@ -42,7 +38,7 @@ const playerSchema = new Schema({
     id: false,
 });
 
-playerSchema.virtual('twoPercentage').get(function () {
+gameStatSchema.virtual('twoPercentage').get(function () {
     let numb = this.twosMade / this.twoAttempts;
 
     numb = Math.round(numb * 1000)/1000;
@@ -50,7 +46,7 @@ playerSchema.virtual('twoPercentage').get(function () {
     return numb;
 });
 
-playerSchema.virtual('threePercentage').get(function () {
+gameStatSchema.virtual('threePercentage').get(function () {
     let numb;
     
     if(this.threeAttempts > 0){
@@ -64,7 +60,7 @@ playerSchema.virtual('threePercentage').get(function () {
     return numb;
 });
 
-playerSchema.virtual('attemptTwoPercentage').get(function () {
+gameStatSchema.virtual('attemptTwoPercentage').get(function () {
     let numb = this.twoAttempts / (this.twoAttempts + this.threeAttempts);
 
     numb = Math.round(numb * 1000)/1000;
@@ -72,7 +68,7 @@ playerSchema.virtual('attemptTwoPercentage').get(function () {
     return numb;
 });
 
-playerSchema.virtual('attemptThreePercentage').get(function () {
+gameStatSchema.virtual('attemptThreePercentage').get(function () {
     let numb = this.threeAttempts / (this.twoAttempts + this.threeAttempts);
 
     numb = Math.round(numb * 1000)/1000;
@@ -80,7 +76,7 @@ playerSchema.virtual('attemptThreePercentage').get(function () {
     return numb;
 });
 
-playerSchema.virtual('pointsPerGame').get(function () {
+gameStatSchema.virtual('pointsPerGame').get(function () {
     let numb = this.threesMade*3 + this.twosMade*2;
 
     numb = Math.round(numb * 10000)/10000;
@@ -88,7 +84,7 @@ playerSchema.virtual('pointsPerGame').get(function () {
     return numb;
 });
 
-playerSchema.virtual('totalRebounds').get(function () {
+gameStatSchema.virtual('totalRebounds').get(function () {
     let numb = this.offensiveRebounds + this.defensiveRebounds;
 
     numb = Math.round(numb * 10000)/10000;
@@ -96,6 +92,6 @@ playerSchema.virtual('totalRebounds').get(function () {
     return numb;
 });
 
-const Player = model("Player", playerSchema);
+const GameStat = model("GameStat", gameStatSchema);
 
-module.exports = Player;
+module.exports = GameStat;
