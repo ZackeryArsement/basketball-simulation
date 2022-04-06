@@ -20,7 +20,7 @@ const TeamDisplay = ({ team, releasePlayer, finalizeTeam }) => {
                             <div className={classes.stat}>
                                 APG: {player.playerStat.assists}
                             </div>
-                            <button className={classes.releaseBtn} value={player._id} onClick={releasePlayer}>Release</button>
+                            <button className={classes.releaseBtn} value={player.playerStat._id} onClick={releasePlayer}>Release</button>
                         </div>
                     ) : (
                         <div className={classes.playerDisplay}>

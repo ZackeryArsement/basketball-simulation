@@ -18,7 +18,9 @@ const Navbar = () => {
             </div>
             <div className={classes.rightNav}>
                 <div className={classes.court}>
-                    <img src={Court} className={classes.innerCourt} alt='Play Icon'/>
+                    <Link to="/play">
+                        <img src={Court} className={classes.innerCourt} alt='Play Icon'/>
+                    </Link>
                 </div>
 
                 <Link to="/marketplace">

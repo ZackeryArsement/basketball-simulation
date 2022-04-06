@@ -2,10 +2,11 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 // import classes from './App.module.css'
 import Navbar from './components/navbar/Navbar';
 
-import HomePage from './pages/HomePage';
 import LoginSignup from './pages/LoginSignup';
-import Profile from './pages/Profile';
+import HomePage from './pages/HomePage';
+import Play from './pages/Play';
 import Marketplace from './pages/Marketplace';
+import Profile from './pages/Profile';
 
 import {
   ApolloClient,
@@ -69,10 +70,10 @@ function App() {
                   element={<HomePage />}
                   />
 
-                  {/* Profile Route */}
+                  {/* Homepage Route */}
                   <Route 
-                  path="/profile"
-                  element={<Profile />}
+                  path="/play"
+                  element={<Play />}
                   />
 
                   {/* Marketplace Route */}
@@ -80,6 +81,13 @@ function App() {
                   path="/marketplace"
                   element={<Marketplace />}
                   />
+
+                  {/* Profile Route */}
+                  <Route 
+                  path="/profile"
+                  element={<Profile />}
+                  />
+
                 </Routes>
               </main>
             </Router>

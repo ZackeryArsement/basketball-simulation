@@ -39,7 +39,8 @@ const Marketplace = () => {
 
     //Release player from your roster
     const releasePlayer = (e) => {
-        let tempTeam = team.filter(currentPlayer => currentPlayer._id !== e.target.value);
+        // Filter out the player that has been selected to be removed from team. Check if the player is pulled from database i.e. has 'playerStat' attribute, otherwise just take _id
+        let tempTeam = team.filter(currentPlayer => currentPlayer.playerStat ? currentPlayer.playerStat._id !== e.target.value : currentPlayer._id !== e.target.value);
 
         setTeam(tempTeam)
     }
@@ -55,23 +56,30 @@ const Marketplace = () => {
                 
                 const mapTeam = async () => {
                     await team.map((player) => {
-                        // console.log(player)
-                        recruitPlayer({
-                            variables: {
-                                id: player._id,
-                                name: player.name
-                            }
-                        })
+                        // If the player is coming from the database then its id is from player.playerStat
+                        if(player.playerStat){
+                            recruitPlayer({
+                                variables: {
+                                    id: player.playerStat._id,
+                                    name: player.name
+                                }
+                            })
+                        // Otherwise the id is directly in the player object
+                        } else{
+                            recruitPlayer({
+                                variables: {
+                                    id: player._id,
+                                    name: player.name
+                                }
+                            })
+                        }
+
                     })
                 }
                 await mapTeam();
             } catch (err){
                 console.log(err)
             }
-
-            // console.log('second')
-            // await refetch();
-
         }
     }
     useEffect(()=>{
@@ -85,7 +93,6 @@ const Marketplace = () => {
         if(!loadingT && team.length === 0){
             await refetch();
             setTeam(dataT.userTeam.team)
-            console.log(dataT.userTeam.team)
         }
     }, [loadingT])
 
