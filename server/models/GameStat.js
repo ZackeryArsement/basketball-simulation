@@ -1,6 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const gameStatSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
     twoAttempts: {
         type: Number,
         required: true,

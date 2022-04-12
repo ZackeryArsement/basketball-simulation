@@ -1,0 +1,9 @@
+.gameTab{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: gray solid 2px;
+    height: 4rem;
+}

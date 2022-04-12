@@ -14,6 +14,14 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  wins: {
+    type: Number,
+    default: 0,
+  },
+  losses: {
+    type: Number,
+    default: 0,
+  },
   email: {
     type: String,
     required: true,

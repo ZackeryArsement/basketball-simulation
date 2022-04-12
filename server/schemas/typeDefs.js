@@ -36,6 +36,7 @@ type UserPlayer {
 
 type GameStat {
     _id: ID
+    name: String
     twoAttempts: Float
     threeAttempts: Float
     twosMade: Float
@@ -53,10 +54,13 @@ type GameStat {
 
 type Game {
     _id: ID
-    user1: String
-    user2: String
-    team1: [Player]
-    team2: [Player]
+    user1: User
+    user2: User
+    score1: Float
+    score2: Float
+    team1: [GameStat]
+    team2: [GameStat]
+    ai: Boolean
 }
 
 type Season {
@@ -75,6 +79,7 @@ type Query {
     players: [Player]
     player: Player
     userTeam: User
+    userGames: [Game]
 }
 
 type Mutation {
@@ -82,6 +87,8 @@ type Mutation {
     login(username: String!, password: String!): Auth
     recruitPlayer(id: String!, name: String!) : User
     clearTeam(id: String!) : User
+    addGame(user1: String!, user2: String, score1: Float!, score2: Float!, ai: Boolean!): Game
+    addStats(gameId: String!, team: Float!, name: String!, twoAttempts: Float!, threeAttempts: Float!, twosMade: Float!, threesMade: Float!, offensiveRebounds: Float!, defensiveRebounds: Float!, assists: Float!) : GameStat
 }
 `
 

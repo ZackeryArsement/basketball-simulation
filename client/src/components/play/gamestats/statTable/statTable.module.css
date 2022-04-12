@@ -1,3 +1,15 @@
 .stats{
     margin-top: 6rem;
 }
+
+.banner{
+    background-color: aqua;
+    height: 4rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: var(--softBlue) solid 2px;
+}

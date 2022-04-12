@@ -1,7 +1,11 @@
-const UserRecord = () => {
+import GameTab from "./gameTab/GameTab";
+
+const UserRecord = ({ gameHistory }) => {
     return(
         <div>
-            asdf
+            {gameHistory.userGames.map((game) =>(
+                    <GameTab game={game} key={game._id}/>
+            ))}
         </div>
     )
 }

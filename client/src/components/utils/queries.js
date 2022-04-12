@@ -62,3 +62,56 @@ query userTeam {
     }
 }
 `
+
+export const QUERY_USER_GAMES = gql`
+query userGames {
+    userGames {
+        _id
+        user1{
+            _id
+            username
+        }
+        user2{
+            _id
+            username
+        }
+        score1
+        score2
+        ai
+        team1{
+            _id
+            name
+            twoAttempts
+            threeAttempts
+            twosMade
+            threesMade
+            offensiveRebounds
+            defensiveRebounds
+            assists
+            twoPercentage
+            threePercentage
+            attemptTwoPercentage
+            attemptThreePercentage
+            pointsPerGame
+            totalRebounds
+        }
+        team2{
+            _id
+            name
+            twoAttempts
+            threeAttempts
+            twosMade
+            threesMade
+            offensiveRebounds
+            defensiveRebounds
+            assists
+            twoPercentage
+            threePercentage
+            attemptTwoPercentage
+            attemptThreePercentage
+            pointsPerGame
+            totalRebounds
+        }
+    }
+}
+`

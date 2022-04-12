@@ -5,13 +5,21 @@ import classes from './Play.module.css'
 import GameStat from "../components/play/gamestats/GameStats";
 
 import { useQuery, useMutation } from '@apollo/client'
+import { ADD_GAME } from '../components/utils/mutations';
+import { ADD_STATS } from "../components/utils/mutations";
+import { QUERY_PLAYERS } from '../components/utils/queries';
 import { QUERY_USER_TEAM } from "../components/utils/queries";
 
 import Auth from '../components/utils/auth'
 
 const Play = () => {
     const { loading: loadingT, data: dataT, refetch } = useQuery(QUERY_USER_TEAM);
+    const { loading: loadingR, data: dataR } = useQuery(QUERY_PLAYERS);
+    const [addGame] = useMutation(ADD_GAME);
+    const [addStats] = useMutation(ADD_STATS);
+
     const [team, setTeam] = useState([]);
+    const [players, setPlayers] = useState([]);
     const [gameStatistics, setGameStatistics] = useState([]);
 
     useEffect(async ()=>{
@@ -47,7 +55,13 @@ const Play = () => {
         }
     }, [loadingT])
 
-    useEffect(async ()=>{
+    useEffect(()=>{
+        if(!loadingR){
+            setPlayers(dataR.players)
+        }
+    }, [loadingR])
+
+    useEffect(()=>{
         if(team.length === 6){
             // console.log(team)
             teamSeasonPercentage(team);
@@ -201,13 +215,7 @@ const Play = () => {
     }
 
     // Run a game simulation (team1, team2, team shots/iteration, minutes/iteration, reshots allowed / iteration)
-    const runGame = () => {
-        let homeTeam = team;
-        let visitorTeam = team;
-        let itShots = 1;
-        let itMin = 1;
-        let allowedReshots = 3;
-
+    const runGame = async (homeTeam, visitorTeam, itShots, itMin, allowedReshots, aiGame ) => {
         let numbIterations = 48/itMin;
 
         let homeTeamScore = 0;
@@ -422,8 +430,67 @@ const Play = () => {
         // createMainTable(gameStats[0], gameStats[1]);
         // displayScoreWinner(homeTeamScore, visitorTeamScore, homeTeam, visitorTeam);
         // console.log(homeTeam)
-        // console.log(gameStats)
-        setGameStatistics(gameStats);
+        gameStats[2] = [{
+            user: team[team.length-1].teamName,
+            score: homeTeamScore
+        }, 
+        {
+            user: team[team.length-1].teamName,
+            score: visitorTeamScore
+        }];
+
+        await setGameStatistics(gameStats);
+
+        if(aiGame){
+            const newGame = await addGame({
+                variables: {
+                    user1: Auth.getProfile().data.username,
+                    ai: aiGame,
+                    score1: homeTeamScore,
+                    score2: visitorTeamScore,
+                }
+            })
+
+            let team1 = gameStats[0];
+            let team2 = gameStats[1];
+
+
+            await team1.map(async (player) => {
+                await addStats({
+                    variables: {
+                        gameId: newGame.data.addGame._id, 
+                        team: 1, 
+                        name: player.name, 
+                        twoAttempts: player.twoAttempts, 
+                        threeAttempts: player.threeAttempts, 
+                        twosMade: player.twosMade, 
+                        threesMade: player.threesMade, 
+                        offensiveRebounds: player.offensiveRebounds, 
+                        defensiveRebounds: player.defensiveRebounds, 
+                        assists: 5
+                    }
+                })
+            })
+
+            await team2.map(async (player) => {
+                await addStats({
+                    variables: {
+                        gameId: newGame.data.addGame._id, 
+                        team: 2, 
+                        name: player.name, 
+                        twoAttempts: player.twoAttempts, 
+                        threeAttempts: player.threeAttempts, 
+                        twosMade: player.twosMade, 
+                        threesMade: player.threesMade, 
+                        offensiveRebounds: player.offensiveRebounds, 
+                        defensiveRebounds: player.defensiveRebounds, 
+                        assists: 5
+                    }
+                })
+            })
+        }
+
+        
     };
 
     const playerRebound = (reboundTeam) => {
@@ -478,9 +545,62 @@ const Play = () => {
         return rebounder();
     }
 
+    const runAI = async () => {
+        const newTeam = () => {
+            let CreatedTeam = []
+
+            for(let i=0; i<5;){
+                const rand = Math.floor(Math.random()*players.length);
+                if(CreatedTeam.indexOf(players[rand]) !== -1){
+                    continue;
+                };
+                CreatedTeam.push(players[rand]);
+                i++
+            }
+
+            return CreatedTeam
+        }
+
+        let AITeam = [];
+
+        await newTeam().map((player, index) => {
+            let tempPlayer = JSON.parse(JSON.stringify(player))
+
+            tempPlayer.shootChance = null;
+            tempPlayer.chanceOffReb = null;
+            tempPlayer.chanceDefReb = null;
+
+            Object.preventExtensions(tempPlayer)
+
+            AITeam[index] = tempPlayer;
+        })
+        
+        let teamStats = {
+            teamName: 'AI TEAM',
+            imgURL: "./assets/images/GSW.jpg",
+            totShots: null,
+            offensiveRebounds: null,
+            defensiveRebounds: null,
+            offRebPer: null,
+            defRebPer: null
+        }
+
+        await AITeam.push(teamStats);
+
+        await teamSeasonPercentage(AITeam)
+        // console.log(AITeam)
+        // console.log(team)
+        runGame(team, AITeam, 1, 1, 3, true)
+    }
+
+    const runMultiplayer = async () => {
+        console.log('nothing')
+    }
+
     return (
         <div className={classes.main}>
-            <button className={classes.playBtn} onClick={runGame}>Play</button>
+            <button className={classes.playBtn} onClick={runAI}>Play AI</button>
+            <button className={classes.playBtn} onClick={runMultiplayer}>Play User</button>
 
             <GameStat gameStatistics={gameStatistics}/>
         </div>

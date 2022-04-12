@@ -55,10 +55,10 @@ const Marketplace = () => {
                 });
                 
                 const mapTeam = async () => {
-                    await team.map((player) => {
+                    await team.map(async (player) => {
                         // If the player is coming from the database then its id is from player.playerStat
                         if(player.playerStat){
-                            recruitPlayer({
+                            await recruitPlayer({
                                 variables: {
                                     id: player.playerStat._id,
                                     name: player.name
@@ -66,7 +66,7 @@ const Marketplace = () => {
                             })
                         // Otherwise the id is directly in the player object
                         } else{
-                            recruitPlayer({
+                            await recruitPlayer({
                                 variables: {
                                     id: player._id,
                                     name: player.name

@@ -64,3 +64,55 @@ mutation clearTeam($id: String!){
   }
 }
 `
+
+export const ADD_GAME = gql`
+mutation addGame($user1: String!, $user2: String, $score1: Float!, $score2: Float!, $ai: Boolean!){
+  addGame(user1: $user1, user2: $user2, score1: $score1, score2: $score2, ai: $ai){
+    _id
+  }
+}
+`
+
+export const ADD_STATS = gql`
+mutation addStats(
+  $gameId: String!, 
+  $team: Float!, 
+  $name: String!, 
+  $twoAttempts: Float!, 
+  $threeAttempts: Float!, 
+  $twosMade: Float!, 
+  $threesMade: Float!, 
+  $offensiveRebounds: Float!, 
+  $defensiveRebounds: Float!, 
+  $assists: Float!
+  ) {
+    addStats(
+      gameId: $gameId, 
+      team: $team, 
+      name: $name, 
+      twoAttempts: $twoAttempts, 
+      threeAttempts: $threeAttempts, 
+      twosMade: $twosMade, 
+      threesMade: $threesMade, 
+      offensiveRebounds: $offensiveRebounds, 
+      defensiveRebounds: $defensiveRebounds, 
+      assists: $assists
+      ) {
+        _id
+        name
+        twoAttempts
+        threeAttempts
+        twosMade
+        threesMade
+        offensiveRebounds
+        defensiveRebounds
+        assists
+        twoPercentage
+        threePercentage
+        attemptTwoPercentage
+        attemptThreePercentage
+        pointsPerGame
+        totalRebounds
+    }
+}
+`
