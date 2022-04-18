@@ -3,4 +3,9 @@
     flex-wrap: wrap;
     background-color: var(--tan);
     margin-top: 6rem;
+    background: linear-gradient(45deg, 
+        var(--softBlue) 5%, 
+        var(--lightBlue), 
+        var(--lightOrange), 
+        var(--deepOrange));
 }

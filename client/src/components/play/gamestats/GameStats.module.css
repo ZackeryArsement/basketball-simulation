@@ -2,9 +2,12 @@
     display: flex;
     height: 8rem;
     width: 100%;
-    background-color: var(--deepBlue);
     color: black;
     font-size: 5rem;
+    background: linear-gradient(45deg,
+        var(--lightOrange),
+        gray 15% 85%,
+        var(--lightOrange));
 }
 
 .homeBanner{
@@ -16,6 +19,7 @@
 .homeBanner .score{
     width: 130px;
     text-align: center;
+    text-shadow: 1px 1px 15px var(--deepBrown);
     margin-right: 1rem;
 }
 
@@ -28,9 +32,33 @@
 .visitorBanner .score{
     width: 130px;
     text-align: center;
+    text-shadow: 1px 1px 15px var(--deepBrown);
     margin-left: 1rem;
 }
 
 .vs{
     width: 70px;
+    text-shadow: 1px 1px 20px var(--deepOrange);
+}
+
+.default{
+    height: 80vh;
+    background: radial-gradient(
+        var(--tan) 50%, 
+        var(--lightOrange));
+}
+
+.updated{
+    height: 80vh;
+    background: linear-gradient(45deg,
+        var(--lightOrange),
+        gray 25% 66%,
+        var(--lightOrange));
+}
+
+.noData{
+    text-align: center;
+    padding-top: 40vh;
+    font-size: 3rem;
+    font-weight: 500;
 }

@@ -2,3 +2,36 @@
     margin-top: 6rem;
     background-color: var(--tan);
 }
+
+.userStats{
+    display: flex;
+    padding: 2rem 5rem;
+    background-color: var(--softBlue);
+    color: black;
+    border-radius: 15px;
+}
+
+.stat{
+    margin: auto;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.header{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 500;
+    padding: 2rem;
+    background: linear-gradient(45deg,
+        var(--deepOrange) 10%,
+        var(--lightOrange), 
+        var(--deepOrange));
+}
+
+.currentTeam{
+    margin-top: 1rem;
+}
+
+.record{
+    margin-bottom: 2rem;
+}

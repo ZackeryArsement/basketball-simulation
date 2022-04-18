@@ -1,10 +1,23 @@
+import classes from './UserRecord.module.css'
+
+import { useEffect, useState } from "react";
 import GameTab from "./gameTab/GameTab";
 
-const UserRecord = ({ gameHistory }) => {
+const UserRecord = ({ gameHistory, selectPlayer }) => {
+    const [userGames, setUserGames] = useState([]);
+
+    useEffect(async ()=> {
+        console.log(gameHistory)
+        await setUserGames([...gameHistory.userGames].reverse())
+    },[gameHistory])
     return(
         <div>
-            {gameHistory.userGames.map((game) =>(
-                    <GameTab game={game} key={game._id}/>
+            <div className={classes.gameHistory}>
+                Game History
+            </div>
+
+            {userGames.map((game) =>(
+                    <GameTab game={game} key={game._id} selectPlayer={selectPlayer}/>
             ))}
         </div>
     )

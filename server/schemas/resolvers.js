@@ -13,18 +13,29 @@ const resolvers = {
         players: async () => {
             return Player.find();
         },
-        // player: async (parent, { name }, context) => {
-        //     return Player.findOne({ name: name, userId: context.user._id });
-        // },
+        userPlayerGames: async (parent, { name }, context) => {
+            const userPlayer = await UserPlayer.findOne({ name: name, userId: context.user._id })
+            .populate({
+                path: 'gameStats', 
+                options: {
+                    limit: 30
+                }
+            })
+            .limit(30)
+            
+            return userPlayer;
+        },
         userTeam: async (parent, args, context) => {
             if (context.user){
-                let team = await User.findById({_id: context.user._id}).populate({
+                let team = await User.findById({ _id: context.user._id })
+                .populate({
                     path: 'team',
                     populate: {
                         path: 'playerStat',
                         model: 'Player'
                     }
                 })
+
                 return team
             }
 
@@ -36,6 +47,7 @@ const resolvers = {
                 {user2: { $in: context.user._id }}
                 ] 
             })
+            .limit(30)
             .populate({
                 path: 'user1',
                 model: 'User'
@@ -47,7 +59,18 @@ const resolvers = {
             .populate('team1')
             .populate('team2');
 
+            // console.log(games)
             return games
+        },
+        topWinUsers: async (parent, args, context) => {
+            const winners = await User.find({ wins: { $gte: 20 }}).sort({wins: -1}).limit(50)
+
+            return winners
+        },
+        topPercentageUsers: async (parent, args, context) => {
+            const winners = await User.find({ wins: { $gte: 20 }}).sort({winPercentage: -1}).limit(50)
+
+            return winners
         },
     },
     Mutation: {
@@ -110,9 +133,20 @@ const resolvers = {
             return user
         },
         addGame: async (parent, { user1, user2, ai, score1, score2 }, context) => {
-            let user1Object = await User.findOne(
-                { username: user1 }
-            );
+            let user1Object;
+
+            if(score1 > score2){
+                user1Object = await User.findOneAndUpdate(
+                    { username: user1 },
+                    { $inc: {wins: 1}}
+                );
+            } else {
+                user1Object = await User.findOneAndUpdate(
+                    { username: user1 },
+                    { $inc: {losses: 1}}
+                );
+            }
+
 
             if(ai){
                 const game = await Game.create(
@@ -120,11 +154,13 @@ const resolvers = {
                 )
                 return game
             } else{
-                const user2Object = User.find({username: user2});
+                const user2Object = User.findOneAndUpdate({username: user2});
 
                 constgame = await Game.create(
                     { user1: user1Object, user2: user2Object, ai: ai, score1: score1, score2: score2}
                 )
+
+
                 return game
             }
 
@@ -142,6 +178,14 @@ const resolvers = {
                     assists: assists
                 }
             )
+
+            if(team === 1){
+                const userPlayer = await UserPlayer.findOneAndUpdate(
+                    { name: name, userId: context.user._id},
+                    { $addToSet: { gameStats: gameStat }},
+                    { new: true}
+                )
+            }
 
             const game = await Game.findOneAndUpdate(
                 { _id: gameId},

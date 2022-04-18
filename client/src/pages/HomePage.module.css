@@ -1,0 +1,10 @@
+.homePage{
+    height: 100vh;
+    margin-top: 6rem;
+    padding: 0.1rem;
+    background: linear-gradient(45deg, 
+        var(--softBlue) 5%, 
+        var(--lightBlue), 
+        var(--lightOrange), 
+        var(--deepOrange));
+}

@@ -1,0 +1,23 @@
+.header{
+    display: flex;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+.username{
+    margin-left: 20%;
+    width: 20%;
+}
+
+.wins{
+    width: 20%;
+}
+
+.losses{
+    width: 20%;
+}
+
+.winPercentage{
+    width: 20%;
+}

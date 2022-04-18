@@ -1,0 +1,33 @@
+.row{
+    display: flex;
+    padding: 0.33rem;
+    border-bottom: black solid 1px;
+}
+
+.rank{
+    width: 20%;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.username{
+    width: 20%;
+    font-size: 1.25rem;
+}
+
+.wins{
+    width: 20%;
+    font-size: 1.25rem;
+
+}
+
+.losses{
+    width: 20%;
+    font-size: 1.25rem;
+
+}
+
+.percentage{
+    width: 20%;
+    font-size: 1.25rem;
+}

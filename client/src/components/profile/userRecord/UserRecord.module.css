@@ -1,0 +1,8 @@
+.gameHistory{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 1rem;
+    background: linear-gradient(var(--deepOrange) 10%, var(--lightOrange));
+    border-bottom: black 2px solid;
+}

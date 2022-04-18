@@ -1,9 +1,35 @@
 .gameTab{
     display: flex;
-    justify-content: center;
+    justify-content: left;
     width: 100%;
     outline: none;
     border: none;
     border-bottom: gray solid 2px;
     height: 4rem;
+}
+
+.buttonDiv{
+    display: flex;
+    margin-left: 15px;
+}
+.username{
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.score{
+    font-size: 2.25rem;
+    font-weight: 500;
+}
+
+.scoreDiv{
+    display: flex;
+    margin-left: 75px;
+}
+
+.dash{
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0.5rem 0rem;
 }

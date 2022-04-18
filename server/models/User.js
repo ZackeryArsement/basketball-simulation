@@ -32,6 +32,13 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'UserPlayer'
   }],
+},
+{
+    toObject: {
+        virtuals: true,
+    },
+
+    id: false,
 });
 
 userSchema.pre("save", async function (next) {
@@ -46,6 +53,20 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
+
+userSchema.virtual('winPercentage').get(function () {
+  let numb;
+
+  if(this.wins > 0 && this.losses > 0){
+    numb = this.wins / (this.wins + this.losses);
+
+    numb = Math.round(numb * 10000)/10000;
+  } else {
+    numb = 0;
+  }
+
+  return numb;
+});
 
 const User = model("User", userSchema);
 

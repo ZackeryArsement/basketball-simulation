@@ -1,12 +1,15 @@
 .row{
     display: flex;
+    background-color: var(--offWhite);
 }
 
 .name{
     width: 13rem;
     font-size: 1.5rem;
-    /* background-color: aqua; */
+    background-color: var(--tan);
+    border: none;
     border-bottom: var(--deepBlue) solid 2px;
+    padding: 0.5rem;
 }
 
 .statSection{
@@ -21,4 +24,5 @@
     font-size: 1.15rem;
     border-left: var(--deepBlue) solid 2px;
     border-bottom: var(--deepBlue) solid 2px;
+    padding: 0.5rem;
 }

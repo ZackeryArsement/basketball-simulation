@@ -37,6 +37,9 @@ export const QUERY_USER_TEAM = gql `
 query userTeam {
     userTeam {
         _id
+        wins
+        losses
+        winPercentage
         team{
             _id
             userId
@@ -112,6 +115,54 @@ query userGames {
             pointsPerGame
             totalRebounds
         }
+    }
+}
+`
+
+export const QUERY_USER_PLAYER_GAMES = gql`
+query userPlayerGames($name: String!){
+    userPlayerGames(name: $name) {
+        _id
+        gameStats{
+            _id
+            name
+            twoAttempts
+            threeAttempts
+            twosMade
+            threesMade
+            offensiveRebounds
+            defensiveRebounds
+            assists
+            twoPercentage
+            threePercentage
+            attemptTwoPercentage
+            attemptThreePercentage
+            pointsPerGame
+            totalRebounds
+        }
+    }
+}
+`
+
+export const QUERY_USER_TOP_WINS = gql`
+query topWinUsers {
+    topWinUsers {
+        _id
+        username
+        wins
+        losses
+        winPercentage
+    }
+}
+`
+export const QUERY_USER_TOP_WIN_PERCENTAGE = gql`
+query topPercentageUsers {
+    topPercentageUsers {
+        _id
+        username
+        wins
+        losses
+        winPercentage
     }
 }
 `

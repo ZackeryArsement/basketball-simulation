@@ -7,10 +7,13 @@ import { useState, useEffect } from 'react';
 import PlayerRow from './playerRow/PlayerRow'
 import HeaderRow from './headerRow/HeaderRow';
 
-const Team = () => {
+const Team = ({ selectPlayer }) => {
     const { loading: loadingT, data: dataT, refetch } = useQuery(QUERY_USER_TEAM);
 
     const [team, setTeam] = useState([]);
+    const [wins, setWins] = useState('');
+    const [losses, setLosses] = useState('');
+    const [winPercentage, setWinPercentage] = useState('');
 
 
     useEffect(async () => {
@@ -18,19 +21,49 @@ const Team = () => {
             await refetch();
             let tempTeam = [...dataT.userTeam.team];
 
-            setTeam(tempTeam.sort((a, b) => {
+            await setTeam(tempTeam.sort((a, b) => {
                 return b.playerStat.pointsPerGame - a.playerStat.pointsPerGame
             }))
+            setWins(dataT.userTeam.wins)
+            setLosses(dataT.userTeam.losses)
+            setWinPercentage(String(dataT.userTeam.winPercentage*100).substring(0,5))
         }
     }, [loadingT])
 
     return (
         <div className={classes.teamTable}>
+            <div className={classes.header}>
+                <div className={classes.record}>
+                    Record
+                </div>
+
+                <div className={classes.userStats}>
+                    <div className={classes.stat}>
+                        Wins: {wins}
+                    </div>
+
+                    <div className={classes.stat}>
+                        Losses: {losses}
+                    </div>
+                    
+                    <div className={classes.stat}>
+                        Win Percentage: {winPercentage}%
+                    </div>
+                </div>
+
+                <div className={classes.currentTeam}>
+                    Current Team
+                </div>
+            </div>
+
             <HeaderRow />
             {team.length === 5 ? 
                 team.map((player) => (
-                    <PlayerRow playerStat={player.playerStat} key={player.name} />
+                    <PlayerRow playerStat={player.playerStat} key={player.name} selectPlayer={selectPlayer}/>
                 )) : null}
+
+
+
         </div>
     )
 }

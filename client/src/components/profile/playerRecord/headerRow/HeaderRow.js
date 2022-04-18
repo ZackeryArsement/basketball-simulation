@@ -1,40 +1,39 @@
-import classes from './PlayerRow.module.css'
+import classes from './HeaderRow.module.css'
 
-const PlayerRow = ({ playerStat, selectPlayer }) => {
+const HeaderRow = () => {
     return(
         <div className={classes.row}>
-            <button className={classes.name} onClick={selectPlayer} value={playerStat.name}>
-                {playerStat.name}
-            </button>
+            <div className={classes.name}>
+            </div>
 
             <div className={classes.statSection}>
                 <div className={classes.stat}>
-                    {playerStat.pointsPerGame}
+                    PTS
                 </div>
                 <div className={classes.stat}>
-                    {playerStat.offensiveRebounds + playerStat.defensiveRebounds}
+                    TRB
                 </div>
                 <div className={classes.stat}>
-                    {playerStat.twosMade}
+                    2FG
                 </div>
                 <div className={classes.stat}>
-                    {playerStat.twoAttempts}
+                    2FGA
                 </div>
                 <div className={classes.stat}>
-                    {playerStat.threesMade}
+                    3FG
                 </div>
                 <div className={classes.stat}>
-                    {playerStat.threeAttempts}
+                    3FGA
                 </div>
                 <div className={classes.stat}>
-                    {playerStat.offensiveRebounds}
+                    ORB
                 </div>
                 <div className={classes.stat}>
-                    {playerStat.defensiveRebounds}
+                    DRB
                 </div>
             </div>
         </div>
     )
 }
 
-export default PlayerRow
+export default HeaderRow

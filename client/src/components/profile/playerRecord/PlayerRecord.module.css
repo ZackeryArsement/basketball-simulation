@@ -1,0 +1,19 @@
+.playerHistory{
+    border-right: black 2px solid;
+}
+
+.title{
+    border-bottom: black 2px solid;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 1rem;
+    background: linear-gradient(var(--softBlue) 10%, var(--lightBlue));
+    color: black;
+}
+
+.selectPlayer{
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}

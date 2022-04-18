@@ -1,7 +1,25 @@
 .main{
     margin-top: 6rem;
+    height: 100vh;
+
 }
 
 .playBtn{
-    padding: 1rem;
+    padding: 2rem;
+    outline: none;
+    border: none;
+    margin: 2rem auto;
+    border-radius: 10px;
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, 
+        var(--lightOrange), 
+        var(--deepOrange));
+}
+
+.buttons{
+    display: flex;
+    padding: 3rem;
+    background: linear-gradient(45deg, 
+        var(--softBlue), 
+        var(--lightBlue));
 }

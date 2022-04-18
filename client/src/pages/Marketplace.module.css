@@ -1,3 +1,4 @@
 .marketPlace{
     display: flex;
+    background-color: var(--deepBrown);
 }

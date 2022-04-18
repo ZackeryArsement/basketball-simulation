@@ -15,7 +15,7 @@ const PlayerCard = ( { player, index, team, signPlayer, releasePlayer } ) => {
 
     return(
         <div className={classes.playerCards}>
-                <div className={classes.card} style={selected ? {backgroundColor: 'gray'} : {backgroundColor: 'var(--lightBrown)'}}>
+                <div className={classes.card} style={selected ? {backgroundColor: 'var(--softBlue)', color: 'black', textShadow: '0.5px 0.5px 3px var(--deepBlue)'} : {backgroundColor: 'var(--deepOrange)', textShadow: '0.5px 0.5px 3px var(--lightBrown)'}}>
                     
                     {/* Top row of player card */}
                     <div className={classes.topRow}>
@@ -34,7 +34,14 @@ const PlayerCard = ( { player, index, team, signPlayer, releasePlayer } ) => {
                                 Salary
                             </div>
 
-                            <button className={classes.draftBtn} onClick={!selected ? signPlayer : releasePlayer} value={player._id}>Draft</button>
+                            <button className={classes.draftBtn} onClick={!selected ? signPlayer : releasePlayer} value={player._id}  style={selected ? 
+                                {
+                                    backgroundColor: 'var(--lightBlue)', 
+                                    borderBottom: 'var(--softBlue) 2px solid', 
+                                    borderRight: 'var(--softBlue) 2px solid'
+                                } : {
+                                     backgroundColor: 'var(--lightOrange)'}}>
+                                         Draft</button>
                         </div>
 
                         {/* Right column of top row */}

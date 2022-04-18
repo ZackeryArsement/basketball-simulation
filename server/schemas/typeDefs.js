@@ -5,6 +5,9 @@ type User {
     _id: ID
     username: String
     email: String
+    wins: Float
+    losses: Float
+    winPercentage: Float
     team: [UserPlayer]
 }
 
@@ -80,6 +83,9 @@ type Query {
     player: Player
     userTeam: User
     userGames: [Game]
+    userPlayerGames(name: String!): UserPlayer
+    topWinUsers: [User]
+    topPercentageUsers: [User]
 }
 
 type Mutation {

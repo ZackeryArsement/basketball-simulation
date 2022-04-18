@@ -5,7 +5,7 @@ import HeaderRow from './headerRow/HeaderRow'
 
 import { useState, useEffect } from 'react';
 
-const StatTable = ({ teamStats, team, teamData }) => {
+const StatTable = ({ teamStats, team, teamData, winner }) => {
     const [statToggle, setStatToggle] = useState(false)
 
     const displayStats = () => {
@@ -13,10 +13,10 @@ const StatTable = ({ teamStats, team, teamData }) => {
     }
     return (
         <div>
-            <button className={classes.banner} onClick={displayStats}>
+            <button className={classes.banner} onClick={displayStats} style={winner===team ? {backgroundImage:'linear-gradient(to right, var(--lightBlue), 60% , green)'} : {backgroundImage:'linear-gradient(to right, var(--deepOrange), 60% , red)'}}>
                 {teamData.user} - {teamData.score}
             </button>
-            <div style={statToggle ? {display: 'block'} : {display: 'none'}}>
+            <div className={classes.table} style={statToggle ? {display: 'block'} : {display: 'none'}}>
                 <HeaderRow/>
 
                 {teamStats.map((player)=> (

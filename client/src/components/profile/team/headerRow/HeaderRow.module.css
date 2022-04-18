@@ -1,6 +1,7 @@
 .row{
     display: flex;
     border-bottom: var(--deepBlue) solid 2px;
+    border-top: var(--deepBlue) solid 5px;
 }
 
 .name{

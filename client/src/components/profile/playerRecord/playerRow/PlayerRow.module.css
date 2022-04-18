@@ -7,8 +7,8 @@
     font-size: 1.5rem;
     font-weight: 500;
     background-color: var(--tan);
-    border: none;
     border-bottom: var(--deepBlue) solid 2px;
+    padding: 0.5rem;
 }
 
 .statSection{
@@ -24,4 +24,5 @@
     border-left: var(--deepBlue) solid 2px;
     border-bottom: var(--deepBlue) solid 2px;
     background-color: var(--offWhite);
+    padding: 0.5rem;
 }

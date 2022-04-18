@@ -588,8 +588,6 @@ const Play = () => {
         await AITeam.push(teamStats);
 
         await teamSeasonPercentage(AITeam)
-        // console.log(AITeam)
-        // console.log(team)
         runGame(team, AITeam, 1, 1, 3, true)
     }
 
@@ -599,8 +597,10 @@ const Play = () => {
 
     return (
         <div className={classes.main}>
-            <button className={classes.playBtn} onClick={runAI}>Play AI</button>
-            <button className={classes.playBtn} onClick={runMultiplayer}>Play User</button>
+            <div className={classes.buttons}>
+                <button className={classes.playBtn} onClick={runAI}>Play AI</button>
+                <button className={classes.playBtn} onClick={runMultiplayer}>Play User</button>
+            </div>
 
             <GameStat gameStatistics={gameStatistics}/>
         </div>

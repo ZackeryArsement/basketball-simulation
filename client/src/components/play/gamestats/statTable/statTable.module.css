@@ -3,8 +3,7 @@
 }
 
 .banner{
-    background-color: aqua;
-    height: 4rem;
+    height: 6rem;
     text-align: center;
     font-size: 2rem;
     font-weight: 500;
@@ -12,4 +11,8 @@
     outline: none;
     border: none;
     border-bottom: var(--softBlue) solid 2px;
+}
+
+.table{
+    background-color: var(--offWhite);
 }
