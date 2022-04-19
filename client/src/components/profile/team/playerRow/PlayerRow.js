@@ -29,16 +29,16 @@ const PlayerRow = ({ playerStat, selectPlayer }) => {
                 <div className={classes.stat}>
                     {playerStat.threeAttempts}
                 </div>
-                <div className={classes.stat}>
+                <div className={classes.percentage}>
                     {playerStat.twoPercentage}
                 </div>
-                <div className={classes.stat}>
+                <div className={classes.percentage}>
                     {playerStat.threePercentage}
                 </div>
-                <div className={classes.stat}>
+                <div className={classes.rebounds}>
                     {playerStat.offensiveRebounds}
                 </div>
-                <div className={classes.stat}>
+                <div className={classes.rebounds}>
                     {playerStat.defensiveRebounds}
                 </div>
             </div>

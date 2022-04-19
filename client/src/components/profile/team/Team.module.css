@@ -13,6 +13,7 @@
 
 .stat{
     margin: auto;
+    padding: 0.5rem;
     font-size: 2rem;
     font-weight: 500;
 }
@@ -30,8 +31,40 @@
 
 .currentTeam{
     margin-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .record{
     margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 700px) {
+    .userStats{
+        padding: 1rem 2rem;
+    }
+
+    .stat{
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .header{
+        padding: 0;
+    }
+
+    .userStats{
+        padding: 0.5rem 0.5rem;
+        border-radius: none;
+    }
+
+    .stat{
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .teamTable{
+        margin-top: 4rem;
+    }
 }

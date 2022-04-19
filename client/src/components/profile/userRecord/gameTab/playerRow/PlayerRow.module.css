@@ -25,3 +25,20 @@
     border-bottom: var(--deepBlue) solid 2px;
     background-color: var(--offWhite);
 }
+
+@media screen and (max-width: 570px) {
+    .name{
+        width: 9.5rem;
+        font-size: 1.1rem;
+    }
+
+    .stat{
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .name{
+        width: 6rem;
+    }
+}

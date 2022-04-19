@@ -28,16 +28,16 @@ const HeaderRow = () => {
                 <div className={classes.stat}>
                     3FGA
                 </div>
-                <div className={classes.stat}>
+                <div className={classes.percentage}>
                     2Per
                 </div>
-                <div className={classes.stat}>
+                <div className={classes.percentage}>
                     3Per
                 </div>
-                <div className={classes.stat}>
+                <div className={classes.rebounds}>
                     ORB
                 </div>
-                <div className={classes.stat}>
+                <div className={classes.rebounds}>
                     DRB
                 </div>
             </div>

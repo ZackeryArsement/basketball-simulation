@@ -23,3 +23,78 @@
     font-size: 1.25rem;
     border-left: var(--deepBlue) solid 2px;
 }
+
+.percentage{
+    width: 9.09%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-left: var(--deepBlue) solid 2px;
+}
+
+.rebounds{
+    width: 9.09%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-left: var(--deepBlue) solid 2px;
+}
+
+@media screen and (max-width: 900px) {
+    .stat, .percentage, .rebounds{
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .name{
+        width: 11rem;
+        font-size: 1.25rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .name{
+        width: 9rem;
+        font-size: 1rem;
+    }
+
+    .stat, .percentage, .rebounds{
+        font-size: 0.75rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .rebounds{
+        display: none;
+    }
+
+    .stat, .percentage, .rebounds{
+        width: 11.1%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .stat{
+        width: 11%;
+    }
+
+    .percentage{
+        width: 11.5%;
+    }
+
+    .name{
+        width: 5.5rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .stat{
+        width: 14.28%;
+        padding: 1.25rem 0;
+    }
+
+    .percentage{
+        display: none;
+    }
+}
