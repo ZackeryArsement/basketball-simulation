@@ -23,3 +23,37 @@
     font-size: 1.25rem;
     border-left: var(--deepBlue) solid 2px;
 }
+
+@media screen and (max-width: 700px) {
+    .stat{
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .name{
+        width: 10rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .name{
+        width: 6rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .name{
+        width: 6rem;
+    }
+
+    .stat{
+        font-size: .75rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .name{
+        width: 5.5rem;
+    }
+}

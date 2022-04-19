@@ -62,3 +62,23 @@
     font-size: 3rem;
     font-weight: 500;
 }
+
+@media screen and (max-width: 370px) {
+    .gameBanner{
+        font-size: 4rem;
+    }
+
+    .homeBanner .score{
+        width: 100px;
+        margin-right: 0rem;
+    }
+
+    .visitorBanner .score{
+        width: 100px;
+        margin-left: 0rem;
+    }
+
+    .vs{
+        width: 70px;
+    }
+}

@@ -25,3 +25,34 @@
     border-left: var(--deepBlue) solid 2px;
     border-bottom: var(--deepBlue) solid 2px;
 }
+
+@media screen and (max-width: 600px) {
+    .name{
+        width: 10rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .name{
+        width: 6rem;
+    }
+
+    .stat{
+        padding: 0rem;
+        padding-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .name{
+        width: 5.5rem;
+        font-size: 0.9rem;
+    }
+
+    .stat{
+        padding: 0.5rem;
+        padding-top: 1rem;
+        font-size: 0.9rem;
+    }
+}
