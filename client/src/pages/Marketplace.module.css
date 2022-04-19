@@ -2,3 +2,37 @@
     display: flex;
     background-color: var(--deepBrown);
 }
+
+.searchBar{
+    width: 400px;
+}
+
+.infoBar{
+    margin-top: 6rem;
+}
+
+.teamDisplay{
+    width: 400px;
+}
+
+@media screen and (max-width: 1400px) {
+    .marketPlace{
+        display: block;
+    }
+
+    .infoBar{
+        width: 100%;
+        display: flex;
+        margin-top: 6rem;
+    }
+
+    .teamDisplay{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .infoBar{
+        margin-top: 4rem;
+    }
+}

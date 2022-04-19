@@ -80,13 +80,7 @@
     text-shadow: none;
 }
 
-.leftStats{
-    width: 50%;
-    margin: 0.5rem 0;
-    padding: 0 1.5%;
-}
-
-.rightStats{
+.statContainer{
     width: 50%;
     margin: 0.5rem 0;
     padding: 0 1.5%;
@@ -94,7 +88,7 @@
 
 
 /* Stats */
-.points{
+.stat{
     margin: 1.5% 0;
     padding-left: 4%;
     border-radius: 10px;
@@ -102,42 +96,64 @@
     border-right: 2px solid gray;
 }
 
-.rebounds{
-    margin: 1.5% 0;
-    padding-left: 4%;
-    border-radius: 10px;
-    border-bottom: 2px solid gray;
-    border-right: 2px solid gray;
+@media screen and (max-width: 1000px) {
+    .card{
+        width: 20rem;
+        height: 20rem;
+        margin: 1rem 1rem;
+        border-radius: 15px;
+        outline: black solid 4px;
+        font-weight: 500;
+    }
+
+    .stat{
+
+    }
+
+    /* Top Left Column */
+    .title{
+        margin: 0.5rem 3%;
+        font-size: 1.25rem;
+        height: 4.5rem;
+    }
+
+    .score{
+        font-size: 1.5rem;
+    }
+
+    .description{
+        font-size: 1.25rem;
+    }
+
+    /* Top Right Column */
+    .image{
+        height: 11rem;
+    }
+
+    .draftBtn{
+        margin: 0.5rem 5%;
+    }
+
+    /* Stats Row */
+    .stats{
+        font-size: 1.2rem;
+        margin: 0 5%;
+    }
+
+    .statContainer{
+        width: 50%;
+        margin: 0;
+        padding: 0 1.5%;
+    }
 }
 
-.assists{
-    margin: 1.5% 0;
-    padding-left: 4%;
-    border-radius: 10px;
-    border-bottom: 2px solid gray;
-    border-right: 2px solid gray;
-}
-
-.attempts{
-    margin: 1.5% 0;
-    padding-left: 4%;
-    border-radius: 10px;
-    border-bottom: 2px solid gray;
-    border-right: 2px solid gray;
-}
-
-.percentages{
-    margin: 1.5% 0;
-    padding-left: 4%;
-    border-radius: 10px;
-    border-bottom: 2px solid gray;
-    border-right: 2px solid gray;
-}
-
-.freeThrows{
-    margin: 1.5% 0;
-    padding-left: 4%;
-    border-radius: 10px;
-    border-bottom: 2px solid gray;
-    border-right: 2px solid gray;
+@media screen and (max-width: 710px) {
+    .card{
+        width: 20rem;
+        height: 20rem;
+        margin: 0.5rem 0.1rem;
+        border-radius: 15px;
+        outline: black solid 4px;
+        font-weight: 500;
+    }
 }

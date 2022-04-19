@@ -55,31 +55,31 @@ const PlayerCard = ( { player, index, team, signPlayer, releasePlayer } ) => {
                     <div className={classes.stats}>
 
                         {/* Left Stats column */}
-                        <div className={classes.leftStats}>
-                            <div className={classes.points}>
+                        <div className={classes.statContainer}>
+                            <div className={classes.stat}>
                                 PPG: {player.pointsPerGame}
                             </div>
 
-                            <div className={classes.rebounds}>
+                            <div className={classes.stat}>
                                 RPG: {player.totalRebounds}
                             </div>
 
-                            <div className={classes.assists}>
+                            <div className={classes.stat}>
                                 APG: {player.assists}
                             </div>
                         </div>
 
                         {/* Left Stats column */}
-                        <div className={classes.rightStats}>
-                            <div className={classes.attempts}>
+                        <div className={classes.statContainer}>
+                            <div className={classes.stat}>
                                 2FG: {player.twoPercentage}
                             </div>
 
-                            <div className={classes.percentages}>
+                            <div className={classes.stat}>
                                 3FG: {player.threePercentage}
                             </div>
 
-                            <div className={classes.freeThrows}>
+                            <div className={classes.stat}>
                                 FT%: {player.assists}
                             </div>
                         </div>

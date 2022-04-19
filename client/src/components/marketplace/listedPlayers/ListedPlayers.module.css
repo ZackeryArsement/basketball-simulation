@@ -9,3 +9,9 @@
         var(--lightOrange), 
         var(--deepOrange));
 }
+
+@media screen and (max-width: 1400px) {
+    .listedPlayers{
+        margin-top: 0.5rem;
+    }
+}

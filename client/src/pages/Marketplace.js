@@ -98,12 +98,17 @@ const Marketplace = () => {
 
     return(
         <div className={classes.marketPlace}>
-            <div className={classes.searchBar}>
-                <SearchBar/>
-                <TeamDisplay 
-                    team={team} 
-                    releasePlayer={releasePlayer}
-                    finalizeTeam={finalizeTeam}/>
+            <div className={classes.infoBar}>
+                {/* <div  className={classes.searchBar}>
+                    <SearchBar/>
+                </div> */}
+
+                <div className={classes.teamDisplay}>
+                    <TeamDisplay 
+                        team={team} 
+                        releasePlayer={releasePlayer}
+                        finalizeTeam={finalizeTeam}/>
+                </div>
             </div>
 
             <div className={classes.listedPlayers}>

@@ -1,6 +1,4 @@
 .searchBar{
     height: 25vh;
-    width: 400px;
-    margin-top: 6rem;
     background-color: var(--lightBrown);
 }

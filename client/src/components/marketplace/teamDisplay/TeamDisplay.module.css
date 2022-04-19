@@ -2,6 +2,10 @@
     padding-top: 1rem;
 }
 
+.buttonDiv{
+    display: flex;
+}
+
 .finalizeBtn{
     width: 75%;
     margin: 0 12.5%;
@@ -42,4 +46,26 @@
     font-weight: 500;
     font-size: 1.05rem;
     margin: 0;
+}
+
+@media screen and (max-width: 1400px) {
+    .finalizeBtn{
+        margin: 0.5rem auto;
+    }
+
+    .playerList{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .finalizeBtn{
+        width: 300px;
+    }
+
+    .playerDisplay{
+        display: flex;
+        width: 300px;
+        margin: .5rem .5rem;
+    }
 }
