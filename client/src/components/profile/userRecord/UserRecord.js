@@ -7,8 +7,7 @@ const UserRecord = ({ gameHistory, selectPlayer }) => {
     const [userGames, setUserGames] = useState([]);
 
     useEffect(async ()=> {
-        console.log(gameHistory)
-        await setUserGames([...gameHistory.userGames].reverse())
+        await setUserGames(gameHistory.userGames)
     },[gameHistory])
     return(
         <div>

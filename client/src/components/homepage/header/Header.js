@@ -7,13 +7,13 @@ const Header = () => {
                 Username
             </div>
             <div className={classes.wins}>
-                Wins
+                W
             </div>
             <div className={classes.losses}>
-                Losses
+                L
             </div>
             <div className={classes.winPercentage}>
-                Win Percentage
+                W %
             </div>
         </div>
     )

@@ -8,3 +8,9 @@
         var(--lightOrange), 
         var(--deepOrange));
 }
+
+@media screen and (max-width: 340px) {
+    .homePage{
+        margin-top: 5rem;
+    }
+}

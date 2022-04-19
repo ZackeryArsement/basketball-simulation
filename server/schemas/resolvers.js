@@ -47,6 +47,7 @@ const resolvers = {
                 {user2: { $in: context.user._id }}
                 ] 
             })
+            .sort({ _id: -1})
             .limit(30)
             .populate({
                 path: 'user1',
