@@ -60,7 +60,6 @@ const resolvers = {
             .populate('team1')
             .populate('team2');
 
-            // console.log(games)
             return games
         },
         topWinUsers: async (parent, args, context) => {
@@ -134,6 +133,22 @@ const resolvers = {
             return user
         },
         addGame: async (parent, { user1, user2, ai, score1, score2 }, context) => {
+            // If you have 30 games saved then delete the oldest game and all the stats in it
+            let gameList = await Game.find({ $or: [
+                {user1: { $in: context.user._id }},
+                {user2: { $in: context.user._id }}
+                ] 
+            })
+
+            if(gameList.length > 29){
+                for(let i=0; i<gameList[0].team1.length; i++){
+                     const game1 = await GameStat.findOne({ _id: { $in: gameList[0].team1[i]}}).remove()
+                     const game2 = await GameStat.findOne({ _id: { $in: gameList[0].team2[i]}}).remove()
+                }
+
+                await gameList[0].remove()
+            }
+
             let user1Object;
 
             if(score1 > score2){
