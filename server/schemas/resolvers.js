@@ -14,16 +14,20 @@ const resolvers = {
             return Player.find();
         },
         userPlayerGames: async (parent, { name }, context) => {
-            const userPlayer = await UserPlayer.findOne({ name: name, userId: context.user._id })
-            .populate({
-                path: 'gameStats', 
-                options: {
-                    limit: 30
-                }
-            })
-            .limit(30)
-            
-            return userPlayer;
+            if (context.user){
+                const userPlayer = await UserPlayer.findOne({ name: name, userId: context.user._id })
+                .populate({
+                    path: 'gameStats', 
+                    options: {
+                        limit: 30
+                    }
+                })
+                .limit(30)
+                
+                return userPlayer;
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
         },
         userTeam: async (parent, args, context) => {
             if (context.user){
@@ -42,35 +46,47 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         userGames: async (parent, args, context) => {
-            let games = await Game.find({ $or: [
-                {user1: { $in: context.user._id }},
-                {user2: { $in: context.user._id }}
-                ] 
-            })
-            .sort({ _id: -1})
-            .limit(30)
-            .populate({
-                path: 'user1',
-                model: 'User'
-            })
-            .populate({
-                path: 'user2',
-                model: 'User'
-            })
-            .populate('team1')
-            .populate('team2');
+            if (context.user){
+                let games = await Game.find({ $or: [
+                    {user1: { $in: context.user._id }},
+                    {user2: { $in: context.user._id }}
+                    ] 
+                })
+                .sort({ _id: -1})
+                .limit(30)
+                .populate({
+                    path: 'user1',
+                    model: 'User'
+                })
+                .populate({
+                    path: 'user2',
+                    model: 'User'
+                })
+                .populate('team1')
+                .populate('team2');
 
-            return games
+                return games
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
         },
         topWinUsers: async (parent, args, context) => {
-            const winners = await User.find({ wins: { $gte: 20 }}).sort({wins: -1}).limit(50)
+            if (context.user){
+                const winners = await User.find({ wins: { $gte: 20 }}).sort({wins: -1}).limit(50)
 
-            return winners
+                return winners
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
         },
         topPercentageUsers: async (parent, args, context) => {
-            const winners = await User.find({ wins: { $gte: 20 }}).sort({winPercentage: -1}).limit(50)
+            if (context.user){
+                const winners = await User.find({ wins: { $gte: 20 }}).sort({winPercentage: -1}).limit(50)
 
-            return winners
+                return winners
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
         },
     },
     Mutation: {

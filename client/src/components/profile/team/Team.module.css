@@ -13,8 +13,8 @@
     background-color: var(--softBlue);
     color: black;
     position: absolute;
+    margin-top: .33rem;
     right: 10px;
-    top: 6.2rem;
 }
 
 .userStats{
