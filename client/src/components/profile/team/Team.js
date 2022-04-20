@@ -4,6 +4,8 @@ import { useQuery } from "@apollo/client";
 import { QUERY_USER_TEAM } from "../../../components/utils/queries";
 import { useState, useEffect } from 'react';
 
+import Auth from '../../utils/auth'
+
 import PlayerRow from './playerRow/PlayerRow'
 import HeaderRow from './headerRow/HeaderRow';
 
@@ -33,6 +35,8 @@ const Team = ({ selectPlayer }) => {
     return (
         <div className={classes.teamTable}>
             <div className={classes.header}>
+                <button onClick={() => Auth.logout()} className={classes.logout}>Logout</button>
+
                 <div className={classes.record}>
                     Record
                 </div>

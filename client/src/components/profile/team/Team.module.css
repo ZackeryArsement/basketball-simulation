@@ -3,6 +3,20 @@
     background-color: var(--tan);
 }
 
+.logout{
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    background-color: var(--softBlue);
+    color: black;
+    position: absolute;
+    right: 10px;
+    top: 6.2rem;
+}
+
 .userStats{
     display: flex;
     padding: 2rem 5rem;
