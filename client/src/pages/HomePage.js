@@ -17,17 +17,17 @@ const HomePage = () => {
     
     useEffect(async () => {
         if(!userWinsLoading){
-            refetchUserWins()
-            setTopWinPlayers(userWinsData);
+            await refetchUserWins()
+            await setTopWinPlayers(userWinsData);
         }
-    }, [userWinsData])
+    }, [userWinsLoading])
 
     useEffect(async () => {
         if(!userPercentageLoading){
-            refetchUserPercentage()
-            setTopPercentagePlayers(userPercentageData);
+            await refetchUserPercentage()
+            await setTopPercentagePlayers(userPercentageData);
         }
-    }, [userPercentageData])
+    }, [userPercentageLoading])
 
     return(
         <div className={classes.homePage}>
