@@ -431,11 +431,11 @@ const Play = () => {
         // displayScoreWinner(homeTeamScore, visitorTeamScore, homeTeam, visitorTeam);
         // console.log(homeTeam)
         gameStats[2] = [{
-            user: team[team.length-1].teamName,
+            user: homeTeam[homeTeam.length-1].teamName,
             score: homeTeamScore
         }, 
         {
-            user: team[team.length-1].teamName,
+            user: visitorTeam[visitorTeam.length-1].teamName,
             score: visitorTeamScore
         }];
 
@@ -453,7 +453,6 @@ const Play = () => {
 
             let team1 = gameStats[0];
             let team2 = gameStats[1];
-
 
             await team1.map(async (player) => {
                 await addStats({
@@ -489,8 +488,6 @@ const Play = () => {
                 })
             })
         }
-
-        
     };
 
     const playerRebound = (reboundTeam) => {
@@ -546,49 +543,54 @@ const Play = () => {
     }
 
     const runAI = async () => {
-        const newTeam = () => {
-            let CreatedTeam = []
-
-            for(let i=0; i<5;){
-                const rand = Math.floor(Math.random()*players.length);
-                if(CreatedTeam.indexOf(players[rand]) !== -1){
-                    continue;
-                };
-                CreatedTeam.push(players[rand]);
-                i++
+        if(team.length > 2){
+            const newTeam = () => {
+                let CreatedTeam = []
+    
+                for(let i=0; i<5;){
+                    const rand = Math.floor(Math.random()*players.length);
+                    if(CreatedTeam.indexOf(players[rand]) !== -1){
+                        continue;
+                    };
+                    CreatedTeam.push(players[rand]);
+                    i++
+                }
+    
+                return CreatedTeam
             }
-
-            return CreatedTeam
+    
+            let AITeam = [];
+    
+            await newTeam().map((player, index) => {
+                let tempPlayer = JSON.parse(JSON.stringify(player))
+    
+                tempPlayer.shootChance = null;
+                tempPlayer.chanceOffReb = null;
+                tempPlayer.chanceDefReb = null;
+    
+                Object.preventExtensions(tempPlayer)
+    
+                AITeam[index] = tempPlayer;
+            })
+            
+            let teamStats = {
+                teamName: 'AI TEAM',
+                imgURL: "./assets/images/GSW.jpg",
+                totShots: null,
+                offensiveRebounds: null,
+                defensiveRebounds: null,
+                offRebPer: null,
+                defRebPer: null
+            }
+    
+            await AITeam.push(teamStats);
+    
+            await teamSeasonPercentage(AITeam)
+            await runGame(team, AITeam, 1, 1, 3, true)
+        } else {
+            console.log("You need a team in order to play!")
         }
 
-        let AITeam = [];
-
-        await newTeam().map((player, index) => {
-            let tempPlayer = JSON.parse(JSON.stringify(player))
-
-            tempPlayer.shootChance = null;
-            tempPlayer.chanceOffReb = null;
-            tempPlayer.chanceDefReb = null;
-
-            Object.preventExtensions(tempPlayer)
-
-            AITeam[index] = tempPlayer;
-        })
-        
-        let teamStats = {
-            teamName: 'AI TEAM',
-            imgURL: "./assets/images/GSW.jpg",
-            totShots: null,
-            offensiveRebounds: null,
-            defensiveRebounds: null,
-            offRebPer: null,
-            defRebPer: null
-        }
-
-        await AITeam.push(teamStats);
-
-        await teamSeasonPercentage(AITeam)
-        runGame(team, AITeam, 1, 1, 3, true)
     }
 
     const runMultiplayer = async () => {

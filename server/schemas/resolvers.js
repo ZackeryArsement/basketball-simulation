@@ -157,12 +157,18 @@ const resolvers = {
             })
 
             if(gameList.length > 29){
-                for(let i=0; i<gameList[0].team1.length; i++){
-                     const game1 = await GameStat.findOne({ _id: { $in: gameList[0].team1[i]}}).remove()
-                     const game2 = await GameStat.findOne({ _id: { $in: gameList[0].team2[i]}}).remove()
-                }
+                let excess = gameList.length - 29;
+                let newArray = gameList.slice(0,excess)
 
-                await gameList[0].remove()
+                for(let i=0; i<excess; i++){
+                    let reverseIndex = (excess-1)-i;
+                    for(let i=0; i<5; i++){
+                        const game1 = await GameStat.findOne({ _id: { $in: newArray[reverseIndex].team1[i]}}).remove()
+                        const game2 = await GameStat.findOne({ _id: { $in: newArray[reverseIndex].team2[i]}}).remove()
+                   }
+   
+                   await newArray[(excess-1)-i].remove()
+                }
             }
 
             let user1Object;
