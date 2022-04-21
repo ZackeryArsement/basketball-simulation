@@ -1,7 +1,10 @@
 {
   "name": "basketball-simulator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Basketball Simulator",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
