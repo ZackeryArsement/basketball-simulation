@@ -57,7 +57,7 @@ To review the current global leaderboards the user must navigate to the homepage
 ![Marketplace](https://github.com/ZackeryArsement/basketball-simulation/blob/main/images/screenshots/marketplace.png)
 
 **Play Game Page**
-![Play-Game](https://github.com/ZackeryArsement/basketball-simulation/blob/main/images/screenshots/playGames.png)
+![Play-Game](https://github.com/ZackeryArsement/basketball-simulation/blob/main/images/screenshots/playGame.png)
 
 **Profile Page**
 ![Profile](https://github.com/ZackeryArsement/basketball-simulation/blob/main/images/screenshots/profile.png)
