@@ -4,7 +4,6 @@ import Row from "./row/Row"
 import Header from './header/Header'
 
 const Leaderboard = ({ title, userList }) => {
-    console.log(title, userList)
     return (
         <div className={classes.leaderboard}>
 

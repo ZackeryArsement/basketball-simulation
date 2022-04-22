@@ -22,9 +22,14 @@ const Profile = () => {
 
 
     useEffect(async ()=>{
+        console.log('hit')
         if(!gameLoading){
+            console.log('refetch')
+
             await refetchUserGames();
+            console.log('set')
             await setGameHistory(gameData)
+            console.log('complete')
         }
     }, [gameData])
 
