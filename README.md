@@ -50,11 +50,17 @@ If the user goes to their profile page, which can be accessed by the tab in the 
 To review the current global leaderboards the user must navigate to the homepage tab, which can be accessed by the tab in the navbar that has a basketball as an icon. Once there the top 50 players with the most wins and the top 50 players with the highest percentage are displayed. In order to qualify for the leaderboards a user must have a minimum of 20 wins.
 
 # Screenshots
+**Leaderboard Page**
+![Leaderboards](https://github.com/ZackeryArsement/basketball-simulation/blob/main/images/screenshots/leaderboard.png)
 
-![Leaderboards](https://github.com/ZackeryArsement/basketball-simulation/blob/main/public/images/screenshots/leaderboard.png)
-![Marketplace](https://github.com/ZackeryArsement/basketball-simulation/blob/main/public/images/screenshots/marketplace.png)
-![Play-Game](https://github.com/ZackeryArsement/basketball-simulation/blob/main/public/images/screenshots/playGames.png)
-![Profile](https://github.com/ZackeryArsement/basketball-simulation/blob/main/public/images/screenshots/profile.png)
+**Marketplace Page**
+![Marketplace](https://github.com/ZackeryArsement/basketball-simulation/blob/main/images/screenshots/marketplace.png)
+
+**Play Game Page**
+![Play-Game](https://github.com/ZackeryArsement/basketball-simulation/blob/main/images/screenshots/playGames.png)
+
+**Profile Page**
+![Profile](https://github.com/ZackeryArsement/basketball-simulation/blob/main/images/screenshots/profile.png)
 
 # Contact Information (Sole Contributor)
 <a href="https://www.linkedin.com/in/zackery-arsement/" target="_blank"><img align="center" src="./images/linkedin.png" height="100" /></a>
