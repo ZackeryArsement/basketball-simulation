@@ -26,7 +26,7 @@ const Profile = () => {
             await refetchUserGames();
             await setGameHistory(gameData)
         }
-    }, [gameLoading])
+    }, [gameData])
 
     return(
         <div>

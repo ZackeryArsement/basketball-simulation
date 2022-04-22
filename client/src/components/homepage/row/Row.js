@@ -4,7 +4,7 @@ const Row = ({ user, rank }) => {
     return (
         <div className={classes.row}>
             <div className={classes.rank}>
-                {rank}
+                {rank + 1}
             </div>
 
             <div className={classes.data}>

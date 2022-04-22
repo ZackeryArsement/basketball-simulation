@@ -82,14 +82,10 @@ const resolvers = {
         topPercentageUsers: async (parent, args, context) => {
             if (context.user){
                 const winners = await User.find({ wins: { $gte: 20 }})
-                await winners.map((winner) => {
-                    winner.winPercentage = winner.wins / winner.losses;
-                })
-
                 await winners.sort((a,b) => (a.winPercentage < b.winPercentage) ? 1 : ((b.winPercentage < a.winPercentage) ? -1 : 0))
 
-                if(winners.length > 3){
-                    winners.length = 3;
+                if(winners.length > 50){
+                    winners.length = 50;
                 }
 
                 return winners
