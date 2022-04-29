@@ -44,12 +44,18 @@ mutation recruitPlayer($id: String!, $name: String!){
           offensiveRebounds
           defensiveRebounds
           assists
+          twoBlocks
+          threeBlocks
+          blockRecoveryPer
+          steals
+          turnOvers
           twoPercentage
           threePercentage
           attemptTwoPercentage
           attemptThreePercentage
           pointsPerGame
           totalRebounds
+          totalBlocks
         }
         name
       }
@@ -84,7 +90,11 @@ mutation addStats(
   $threesMade: Float!, 
   $offensiveRebounds: Float!, 
   $defensiveRebounds: Float!, 
-  $assists: Float!
+  $assists: Float!,
+  $twoBlocks: Float!,
+  $threeBlocks: Float!,
+  $steals: Float!,
+  $turnOvers: Float!
   ) {
     addStats(
       gameId: $gameId, 
@@ -96,7 +106,11 @@ mutation addStats(
       threesMade: $threesMade, 
       offensiveRebounds: $offensiveRebounds, 
       defensiveRebounds: $defensiveRebounds, 
-      assists: $assists
+      assists: $assists,
+      twoBlocks: $twoBlocks,
+      threeBlocks: $threeBlocks,
+      steals: $steals,
+      turnOvers: $turnOvers
       ) {
         _id
         name
@@ -107,12 +121,17 @@ mutation addStats(
         offensiveRebounds
         defensiveRebounds
         assists
+        twoBlocks
+        threeBlocks
+        steals
+        turnOvers
         twoPercentage
         threePercentage
         attemptTwoPercentage
         attemptThreePercentage
         pointsPerGame
         totalRebounds
+        totalBlocks
     }
 }
 `

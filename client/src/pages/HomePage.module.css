@@ -9,6 +9,12 @@
         var(--deepOrange));
 }
 
+.loading{
+    height: 100px;
+    border-radius: 15%;
+    margin: 1rem 0 0 1rem;
+}
+
 @media screen and (max-width: 340px) {
     .homePage{
         margin-top: 5rem;

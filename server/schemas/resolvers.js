@@ -208,7 +208,7 @@ const resolvers = {
             }
 
         },
-        addStats: async (parent, { gameId, team, name, twoAttempts, threeAttempts, twosMade, threesMade, offensiveRebounds, defensiveRebounds, assists }, context) => {
+        addStats: async (parent, { gameId, team, name, twoAttempts, threeAttempts, twosMade, threesMade, offensiveRebounds, defensiveRebounds, assists, twoBlocks, threeBlocks, steals, turnOvers }, context) => {
             const gameStat = await GameStat.create(
                 {   
                     name: name, 
@@ -218,7 +218,11 @@ const resolvers = {
                     threesMade: threesMade,
                     offensiveRebounds: offensiveRebounds,
                     defensiveRebounds: defensiveRebounds,
-                    assists: assists
+                    assists: assists,
+                    twoBlocks: twoBlocks,
+                    threeBlocks: threeBlocks,
+                    steals: steals,
+                    turnOvers: turnOvers
                 }
             )
 

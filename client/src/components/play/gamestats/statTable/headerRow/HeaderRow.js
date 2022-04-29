@@ -31,6 +31,9 @@ const HeaderRow = () => {
                 <div className={classes.stat}>
                     DRB
                 </div>
+                <div className={classes.stat}>
+                    BLK
+                </div>
             </div>
         </div>
     )

@@ -33,6 +33,22 @@ const gameStatSchema = new Schema({
         type: Number,
         required: true,
     },
+    twoBlocks: {
+        type: Number,
+        required: true,
+    },
+    threeBlocks: {
+        type: Number,
+        required: true,
+    },
+    steals: {
+        type: Number,
+        required: true,
+    },
+    turnOvers: {
+        type: Number,
+        required: true,
+    },
 },
 {
     toObject: {
@@ -90,6 +106,14 @@ gameStatSchema.virtual('pointsPerGame').get(function () {
 
 gameStatSchema.virtual('totalRebounds').get(function () {
     let numb = this.offensiveRebounds + this.defensiveRebounds;
+
+    numb = Math.round(numb * 10000)/10000;
+
+    return numb;
+});
+
+gameStatSchema.virtual('totalBlocks').get(function () {
+    let numb = this.twoBlocks + this.threeBlocks;
 
     numb = Math.round(numb * 10000)/10000;
 

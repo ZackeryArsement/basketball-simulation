@@ -33,6 +33,10 @@ const Play = () => {
                 tempPlayer.shootChance = null;
                 tempPlayer.chanceOffReb = null;
                 tempPlayer.chanceDefReb = null;
+                tempPlayer.chanceSteal = null;
+                tempPlayer.chanceTurnOver = null;
+                tempPlayer.chanceTwoBlock = null;
+                tempPlayer.chanceThreeBlock = null;
 
                 Object.preventExtensions(tempPlayer)
 
@@ -48,10 +52,19 @@ const Play = () => {
                 offensiveRebounds: null,
                 defensiveRebounds: null,
                 offRebPer: null,
-                defRebPer: null
+                defRebPer: null,
+                steals: null,
+                stealPer: null,
+                turnOvers: null,
+                turnOverPer: null,
+                twoBlocks: null,
+                threeBlocks: null,
+                twoBlockPer: null,
+                threeBlockPer: null,
+                possessions: null,
             }
 
-            setTeam(team => [...team, teamStats])
+            await setTeam(team => [...team, teamStats])
         }
     }, [loadingT])
 
@@ -79,6 +92,13 @@ const Play = () => {
             currentTeam[currentTeam.length-1].totShots = currentTeam[currentTeam.length-1].totShots + playerTotShots;
             currentTeam[currentTeam.length-1].offensiveRebounds = currentTeam[currentTeam.length-1].offensiveRebounds + currentPlayer.offensiveRebounds;
             currentTeam[currentTeam.length-1].defensiveRebounds = currentTeam[currentTeam.length-1].defensiveRebounds + currentPlayer.defensiveRebounds;
+            currentTeam[currentTeam.length-1].steals = currentTeam[currentTeam.length-1].steals + currentPlayer.steals;
+            currentTeam[currentTeam.length-1].turnOvers = currentTeam[currentTeam.length-1].turnOvers + currentPlayer.turnOvers;
+            currentTeam[currentTeam.length-1].twoBlocks = currentTeam[currentTeam.length-1].twoBlocks + currentPlayer.twoBlocks;
+            currentTeam[currentTeam.length-1].threeBlocks = currentTeam[currentTeam.length-1].threeBlocks + currentPlayer.threeBlocks;
+
+            // 0.96 is when defensive player tips ball out of bounds during rebound. Therefore offense does not get rebound but possession continues
+            currentTeam[currentTeam.length-1].possessions = 0.96*(currentTeam[currentTeam.length-1].totShots + currentTeam[currentTeam.length-1].turnOvers - currentTeam[currentTeam.length-1].offensiveRebounds);
         }
 
         // Sum up each teams total shot, check each players chance to shoot
@@ -95,27 +115,76 @@ const Play = () => {
             // Chance a player gets defensive roubound
             currentPlayer.chanceDefReb = currentPlayer.defensiveRebounds / currentTeam[currentTeam.length-1].defensiveRebounds;
 
+            // Chance that this player steals the ball
+            currentPlayer.chanceSteal = currentPlayer.steals / currentTeam[currentTeam.length-1].steals;
+
+            // Chance that this player steals the ball
+            currentPlayer.chanceTurnOver = currentPlayer.turnOvers / currentTeam[currentTeam.length-1].turnOvers;
+
+            // Chance that this player blocks a two
+            currentPlayer.chanceTwoBlock = currentPlayer.twoBlocks / currentTeam[currentTeam.length-1].twoBlocks;
+
+            // Chance that this player blocks a three
+            currentPlayer.chanceThreeBlock = currentPlayer.threeBlocks / currentTeam[currentTeam.length-1].threeBlocks;
+
+
             // Round every percent to the nearest 1000th places
             currentPlayer.shootChance = Math.round(currentPlayer.shootChance * 1000)/1000;
             currentPlayer.chanceOffReb = Math.round(currentPlayer.chanceOffReb * 1000)/1000;
             currentPlayer.chanceDefReb = Math.round(currentPlayer.chanceDefReb * 1000)/1000;
+            currentPlayer.chanceSteal = Math.round(currentPlayer.chanceSteal * 1000)/1000;
+            currentPlayer.chanceTwoBlock = Math.round(currentPlayer.chanceTwoBlock * 1000)/1000;
+            currentPlayer.chanceThreeBlock = Math.round(currentPlayer.chanceThreeBlock * 1000)/1000;
+            currentPlayer.chanceTurnOver = Math.round(currentPlayer.chanceTurnOver * 1000)/1000;
+
         }
     }
 
     // Get stats related to specific team match up
     const playerGamePercentage = (team1, team2) => {
         // The chance that each team gets a rebound, depending on their possession
-        // console.log(team1, team2)
         team1[team1.length-1].defRebPer = team1[team1.length-1].defensiveRebounds / (team1[team1.length-1].defensiveRebounds  + team2[team2.length-1].offensiveRebounds);
         team2[team2.length-1].defRebPer = team2[team2.length-1].defensiveRebounds  / (team2[team2.length-1].defensiveRebounds + team1[team1.length-1].offensiveRebounds);
         team1[team1.length-1].offRebPer = team1[team1.length-1].offensiveRebounds / (team1[team1.length-1].offensiveRebounds + team2[team2.length-1].defensiveRebounds);
         team2[team2.length-1].offRebPer = team2[team2.length-1].offensiveRebounds / (team2[team2.length-1].offensiveRebounds + team1[team1.length-1].defensiveRebounds );
 
+        // Chance that the defensive team blocks a shot being taken
+        // Assume average of 54 2FGA shots per game
+        team1[team1.length-1].twoBlockPer = (team1[team1.length-1].twoBlocks/54)
+        team2[team2.length-1].twoBlockPer = (team2[team2.length-1].twoBlocks/54)
+
+        // Assume average of 34 3FGA shots per game
+        team1[team1.length-1].threeBlockPer = (team1[team1.length-1].threeBlocks/34)
+        team2[team2.length-1].threeBlockPer = (team2[team2.length-1].threeBlocks/34)
+
         // Round each stat to nearest 1000th
         team1[team1.length-1].defRebPer  = Math.round(team1[team1.length-1].defRebPer * 1000)/1000;
         team2[team2.length-1].defRebPer  = Math.round(team2[team2.length-1].defRebPer * 1000)/1000;
+        
         team1[team1.length-1].offRebPer = Math.round(team1[team1.length-1].offRebPer * 1000)/1000;
         team2[team2.length-1].offRebPer = Math.round(team2[team2.length-1].offRebPer * 1000)/1000;
+
+        team1[team1.length-1].possessions  = Math.round(team1[team1.length-1].possessions * 1000)/1000;
+        team2[team2.length-1].possessions  = Math.round(team2[team2.length-1].possessions * 1000)/1000;
+
+        team1[team1.length-1].steals  = Math.round(team1[team1.length-1].steals * 1000)/1000;
+        team2[team2.length-1].steals  = Math.round(team2[team2.length-1].steals * 1000)/1000;
+
+        team1[team1.length-1].totShots  = Math.round(team1[team1.length-1].totShots * 1000)/1000;
+        team2[team2.length-1].totShots  = Math.round(team2[team2.length-1].totShots * 1000)/1000;
+
+        team1[team1.length-1].twoBlocks  = Math.round(team1[team1.length-1].twoBlocks * 1000)/1000;
+        team2[team2.length-1].twoBlocks  = Math.round(team2[team2.length-1].twoBlocks * 1000)/1000;
+
+        team1[team1.length-1].threeBlocks  = Math.round(team1[team1.length-1].threeBlocks * 1000)/1000;
+        team2[team2.length-1].threeBlocks  = Math.round(team2[team2.length-1].threeBlocks * 1000)/1000;
+
+        // Since the chance to block is typically less than 10% for each shot I add another digit to the end of the decimal ie a 3% chance is now represented by 0.300 instead of 0.030, in order to give a more accurate number
+        team1[team1.length-1].twoBlockPer = Math.round(team1[team1.length-1].twoBlockPer * 10000)/1000;
+        team2[team2.length-1].twoBlockPer = Math.round(team2[team2.length-1].twoBlockPer * 10000)/1000;
+
+        team1[team1.length-1].threeBlockPer = Math.round(team1[team1.length-1].threeBlockPer * 10000)/1000;
+        team2[team2.length-1].threeBlockPer = Math.round(team2[team2.length-1].threeBlockPer * 10000)/1000;
     }
 
     // Figure out which player is shooting on the team
@@ -162,24 +231,44 @@ const Play = () => {
         return shooter();
     }
 
-    // Figure out if the player shoots a 2pt or 3 pt... does he make it or miss
-    const playerShoots = (currentPlayer) => {
+    // Figure out if the player shoots a 2pt or 3 pt... does he make it, miss it, or is it blocked
+    const playerShoots = (currentPlayer, defTeam) => {
         let randNumb = Math.floor(Math.random() * 1000);
         let oddsTry2 = currentPlayer[0].attemptTwoPercentage*1000;
 
+        let blockChance;
+        let blockNumb;
+
         // Shoots a 2pt
         if(randNumb <= oddsTry2){
-            // Get another random number to see if the player makes the shot
-            randNumb = Math.floor(Math.random() * 1000);
+            // Check to see if shot is blocked before doing anything else
+            blockNumb = Math.floor(Math.random() * 10000);
+            blockChance = defTeam[5].twoBlockPer * 1000
 
-            let oddMake2 = currentPlayer[0].twoPercentage*1000;
+            // console.log(blockNumb, blockChance)
 
-            // Player makes the shot
-            if(randNumb <= oddMake2){
-                return [2, true, currentPlayer[1]];
-            }
-            else{
-                return [2, false, currentPlayer[1]];
+            if(blockNumb <= blockChance){
+                // Shot is blocked... it is a missed shot
+                // Check which player blocked the shot and what team recovers the ball
+
+                // twoBlockedShot returns the index of the player that blocked the ball on defense
+
+                return [2, false, currentPlayer[1], twoBlockedShot(defTeam)];
+            } else {
+                // If shot isnt blocked then run as if a regular shot attempt happens
+
+                // Get another random number to see if the player makes the shot
+                randNumb = Math.floor(Math.random() * 1000);
+
+                let oddMake2 = currentPlayer[0].twoPercentage*1000;
+
+                // Player makes the shot
+                if(randNumb <= oddMake2){
+                    return [2, true, currentPlayer[1], null];
+                }
+                else{
+                    return [2, false, currentPlayer[1], null];
+                }
             }
         }
         // Shoots a 3pt
@@ -199,6 +288,43 @@ const Play = () => {
         }
     }
 
+    const twoBlockedShot = (currentTeam) => {
+        // Pick a random number 0 and 10000. Each players will cover a range of numbers between 1 and 1000 proportional to there chance to shoot
+        let randNumb = Math.floor(Math.random() * 1000);
+        let deciderArray = [];
+
+
+        for(let i=0; i<(currentTeam.length -1 ); i++){
+            if(i === 0){
+                deciderArray[i] = currentTeam[i].chanceTwoBlock * 1000;
+            }
+            else{
+                deciderArray[i] = deciderArray[i-1] + currentTeam[i].chanceTwoBlock * 1000;
+            }
+        }
+
+        const blocker = () => {
+            switch (true) {
+                case (randNumb <= deciderArray[0]):
+                    return 0;
+
+                case (randNumb <= deciderArray[1]):
+                    return 1;
+
+                case (randNumb <= deciderArray[2]):
+                    return 2;
+
+                case (randNumb <= deciderArray[3]):
+                    return 3;
+
+                case (randNumb <= deciderArray[4]):
+                    return 4;
+                }
+        }
+
+        return blocker();
+    }
+
     // Check which team gets the rebound
     const teamRebound = (offTeam, defTeam) => {
         let randNumb = Math.floor(Math.random() * 1000);
@@ -207,10 +333,10 @@ const Play = () => {
         let offChance = offTeam[offTeam.length -1 ].offRebPer * 1000;
 
         if(randNumb <= offChance){
-            return [offTeam, 'Offensive'];
+            return [offTeam, 'Offensive', defTeam];
         }
         else{
-            return [defTeam, 'Defensive'];
+            return [defTeam, 'Defensive', offTeam];
         }
     }
 
@@ -238,7 +364,11 @@ const Play = () => {
                 threesMade: 0,
                 threeAttempts: 0,
                 offensiveRebounds: 0,
-                defensiveRebounds: 0
+                defensiveRebounds: 0,
+                twoBlocks: 0,
+                threeBlocks: 0,
+                steals: 0,
+                turnOvers: 0
             };
 
             visitorStats[i] = {
@@ -249,7 +379,11 @@ const Play = () => {
                 threesMade: 0,
                 threeAttempts: 0,
                 offensiveRebounds: 0,
-                defensiveRebounds: 0
+                defensiveRebounds: 0,
+                twoBlocks: 0,
+                threeBlocks: 0,
+                steals: 0,
+                turnOvers: 0
             }
         }
 
@@ -266,8 +400,8 @@ const Play = () => {
             let shooterVis = teamShooter(visitorTeam);
 
             // See if that shooter tries a 2pt or 3pt... do they make the shot?
-            let homeShot = playerShoots(shooterHome);
-            let visitorShot = playerShoots(shooterVis);
+            let homeShot = playerShoots(shooterHome, visitorTeam);
+            let visitorShot = playerShoots(shooterVis, homeTeam);
 
             // When a shot is missed teams can rebound and reshoot... limit is dependant on allowedReshots
             let reshots = 0;
@@ -290,7 +424,29 @@ const Play = () => {
                     if(shotStatus[1]){
                         // homeTeamShots = homeTeamShots + 1;
                         homeTeamScore = homeTeamScore + shotStatus[0];
-                    } 
+                    }
+                    // If the shot was blocked then add the stat to the 
+                    else if (shotStatus[3] !== null && shotStatus[3] !== undefined){
+                        addBlockStat('Home', shotStatus)
+
+                        let reboundTeam = blockRecovery(homeTeam, visitorTeam, shotStatus[3]);
+
+                        // Return index of player that rebounded and if Offensive or defensive
+                        let reboundPlayer = playerRebound(reboundTeam);
+                        addReboundStat('Home', reboundPlayer);
+                        
+                        // Whichever team gets the rebound gets to shoot the ball again
+                        let teamShot = playerShoots(teamShooter(reboundTeam[0]), reboundTeam[2]);
+
+                        // If the offensive team gets the rebound then home team can shoot
+                        if(reboundTeam[1] === 'Offensive'){
+                            checkShotRedo('Home', teamShot, reshots);
+                        }
+                        // Else then the defense can shoot
+                        else{
+                            checkShotRedo('Visitor', teamShot, reshots);
+                        }
+                    }
                     // If the team misses the shot then check to see what team gets the rebound
                     else{
                         let reboundTeam = teamRebound(homeTeam, visitorTeam);
@@ -300,7 +456,7 @@ const Play = () => {
                         addReboundStat('Home', reboundPlayer);
                         
                         // Whichever team gets the rebound gets to shoot the ball again
-                        let teamShot = playerShoots(teamShooter(reboundTeam[0]));
+                        let teamShot = playerShoots(teamShooter(reboundTeam[0]), reboundTeam[2]);
 
                         // If the offensive team gets the rebound then home team can shoot
                         if(reboundTeam[1] === 'Offensive'){
@@ -319,7 +475,29 @@ const Play = () => {
                     if(shotStatus[1]){
                         // visitorTeamShots = visitorTeamShots + 1;
                         visitorTeamScore = visitorTeamScore + shotStatus[0];
-                    } 
+                    }
+                    // If the shot was blocked then add the stat to the 
+                    else if (shotStatus[3] !== null && shotStatus[3] !== undefined){
+                        addBlockStat('Visitor', shotStatus)
+
+                        let reboundTeam = blockRecovery(visitorTeam, homeTeam, shotStatus[3]);
+
+                        // Return index of player that rebounded and if Offensive of defensive
+                        let reboundPlayer = playerRebound(reboundTeam);
+                        addReboundStat('Visitor', reboundPlayer);
+                        
+                        // Whichever team gets the rebound gets to shoot the ball again
+                        let teamShot = playerShoots(teamShooter(reboundTeam[0]), reboundTeam[2]);
+
+                        // If the offensive team gets the rebound then home team can shoot
+                        if(reboundTeam[1] === 'Offensive'){
+                            checkShotRedo('Visitor', teamShot, reshots);
+                        }
+                        // Else then the defense can shoot
+                        else{
+                            checkShotRedo('Home', teamShot, reshots);
+                        }
+                    }
                     // If the team misses the shot then check to see what team gets the rebound
                     else{
                         let reboundTeam = teamRebound(visitorTeam, homeTeam);
@@ -329,7 +507,7 @@ const Play = () => {
                         addReboundStat('Visitor', reboundPlayer);
                         
                         // Whichever team gets the rebound gets to shoot the ball again
-                        let teamShot = playerShoots(teamShooter(reboundTeam[0]));
+                        let teamShot = playerShoots(teamShooter(reboundTeam[0]), reboundTeam[2]);
 
                         // If the offensive team gets the rebound then home team can shoot
                         if(reboundTeam[1] === 'Offensive'){
@@ -346,7 +524,7 @@ const Play = () => {
 
             // Add the shooting stats to the player that just shot
             function addShotStat(team, shotStatus){
-                // shotStatus => [point, boolean, playerIndex]
+                // shotStatus => [point, boolean, playerIndex, blockPlayerIndex]
 
                 let currentTeam;
 
@@ -420,16 +598,47 @@ const Play = () => {
                     currentTeam[playerIndex].defensiveRebounds = currentTeam[playerIndex].defensiveRebounds + 1;
                 }
             }
+
+            function addBlockStat(team, shotStatus){
+                let currentTeam;
+
+                // Get the home team object out of the gameStats object
+                if(team === 'Home'){
+                    currentTeam = gameStats[0];
+                }
+                else{
+                    currentTeam = gameStats[1];
+                }
+
+                // Grab the current player that is shooting
+                let currentPlayer = currentTeam[shotStatus[3]];
+
+                // Add a block to that players stat; check if they blocked a 2 or 3 pointer
+                if(shotStatus[0] === 2){
+                    currentPlayer.twoBlocks = currentPlayer.twoBlocks + 1;
+                } else {
+                    currentPlayer.threeBlocks = currentPlayer.threeBlocks + 1;
+                }
+            }
+
+            function blockRecovery(offTeam, defTeam, playerIndex){
+                // Get the player that is blocking
+                let blockingPlayer = defTeam[playerIndex];
+                
+                // Find the percent chance for the defense to recover a ball for this player's blocks
+                let defRecoveryPer = blockingPlayer.blockRecoveryPer*1000;
+
+                let randNumb = Math.floor(Math.random() * 1000);
+
+                // Defense recovers the ball after the block and they gain a rebound
+                if(randNumb <= defRecoveryPer){
+                    return [defTeam, 'Defensive', offTeam];
+                } else {
+                    return [offTeam, 'Offensive', defTeam];
+                }
+            }
         }
 
-        // console.log('The home team scored ' + homeTeamScore + ' points!');
-        // console.log('The visitor team scored ' + visitorTeamScore + ' points!');
-        // console.log('The home team shot ' + homeTeamShots + ' times.');
-        // console.log('The home team shot ' + visitorTeamShots + ' times.');
-
-        // createMainTable(gameStats[0], gameStats[1]);
-        // displayScoreWinner(homeTeamScore, visitorTeamScore, homeTeam, visitorTeam);
-        // console.log(homeTeam)
         gameStats[2] = [{
             user: homeTeam[homeTeam.length-1].teamName,
             score: homeTeamScore
@@ -466,7 +675,11 @@ const Play = () => {
                         threesMade: player.threesMade, 
                         offensiveRebounds: player.offensiveRebounds, 
                         defensiveRebounds: player.defensiveRebounds, 
-                        assists: 5
+                        assists: 5,
+                        twoBlocks: player.twoBlocks,
+                        threeBlocks: player.threeBlocks,
+                        steals: player.steals,
+                        turnOvers: player.turnOvers
                     }
                 })
             })
@@ -483,7 +696,11 @@ const Play = () => {
                         threesMade: player.threesMade, 
                         offensiveRebounds: player.offensiveRebounds, 
                         defensiveRebounds: player.defensiveRebounds, 
-                        assists: 5
+                        assists: 5,
+                        twoBlocks: player.twoBlocks,
+                        threeBlocks: player.threeBlocks,
+                        steals: player.steals,
+                        turnOvers: player.turnOvers
                     }
                 })
             })
@@ -567,6 +784,10 @@ const Play = () => {
                 tempPlayer.shootChance = null;
                 tempPlayer.chanceOffReb = null;
                 tempPlayer.chanceDefReb = null;
+                tempPlayer.chanceSteal = null;
+                tempPlayer.chanceTurnOver = null;
+                tempPlayer.chanceTwoBlock = null;
+                tempPlayer.chanceThreeBlock = null;
     
                 Object.preventExtensions(tempPlayer)
     
@@ -580,7 +801,16 @@ const Play = () => {
                 offensiveRebounds: null,
                 defensiveRebounds: null,
                 offRebPer: null,
-                defRebPer: null
+                defRebPer: null,
+                steals: null,
+                stealPer: null,
+                turnOvers: null,
+                turnOverPer: null,
+                twoBlocks: null,
+                threeBlocks: null,
+                twoBlockPer: null,
+                threeBlockPer: null,
+                possessions: null,
             }
     
             await AITeam.push(teamStats);

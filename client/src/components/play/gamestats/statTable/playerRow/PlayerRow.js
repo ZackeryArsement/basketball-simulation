@@ -32,6 +32,9 @@ const PlayerRow = ({ playerStat }) => {
                 <div className={classes.stat}>
                     {playerStat.defensiveRebounds}
                 </div>
+                <div className={classes.stat}>
+                    {playerStat.twoBlocks + playerStat.threeBlocks}
+                </div>
             </div>
         </div>
     )

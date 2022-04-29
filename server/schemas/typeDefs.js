@@ -21,12 +21,18 @@ type Player {
     offensiveRebounds: Float
     defensiveRebounds: Float
     assists: Float
+    twoBlocks: Float
+    threeBlocks: Float
+    blockRecoveryPer: Float
+    steals: Float
+    turnOvers: Float
     twoPercentage: Float
     threePercentage: Float
     attemptTwoPercentage: Float
     attemptThreePercentage: Float
     pointsPerGame: Float
     totalRebounds: Float
+    totalBlocks: Float
 }
 
 type UserPlayer {
@@ -47,12 +53,17 @@ type GameStat {
     offensiveRebounds: Float
     defensiveRebounds: Float
     assists: Float
+    twoBlocks: Float
+    threeBlocks: Float
+    steals: Float
+    turnOvers: Float
     twoPercentage: Float
     threePercentage: Float
     attemptTwoPercentage: Float
     attemptThreePercentage: Float
     pointsPerGame: Float
     totalRebounds: Float
+    totalBlocks: Float
 }
 
 type Game {
@@ -94,7 +105,7 @@ type Mutation {
     recruitPlayer(id: String!, name: String!) : User
     clearTeam(id: String!) : User
     addGame(user1: String!, user2: String, score1: Float!, score2: Float!, ai: Boolean!): Game
-    addStats(gameId: String!, team: Float!, name: String!, twoAttempts: Float!, threeAttempts: Float!, twosMade: Float!, threesMade: Float!, offensiveRebounds: Float!, defensiveRebounds: Float!, assists: Float!) : GameStat
+    addStats(gameId: String!, team: Float!, name: String!, twoAttempts: Float!, threeAttempts: Float!, twosMade: Float!, threesMade: Float!, offensiveRebounds: Float!, defensiveRebounds: Float!, assists: Float!, twoBlocks: Float!, threeBlocks: Float!, steals: Float!, turnOvers: Float!) : GameStat
 }
 `
 

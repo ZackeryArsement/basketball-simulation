@@ -23,12 +23,18 @@ query players {
         offensiveRebounds
         defensiveRebounds
         assists
+        twoBlocks
+        threeBlocks
+        blockRecoveryPer
+        steals
+        turnOvers
         twoPercentage
         threePercentage
         attemptTwoPercentage
         attemptThreePercentage
         pointsPerGame
         totalRebounds
+        totalBlocks
     }
 }
 `
@@ -53,12 +59,18 @@ query userTeam {
                 offensiveRebounds
                 defensiveRebounds
                 assists
+                twoBlocks
+                threeBlocks
+                blockRecoveryPer
+                steals
+                turnOvers
                 twoPercentage
                 threePercentage
                 attemptTwoPercentage
                 attemptThreePercentage
                 pointsPerGame
                 totalRebounds
+                totalBlocks
             }
             name
         }
@@ -91,6 +103,10 @@ query userGames {
             offensiveRebounds
             defensiveRebounds
             assists
+            twoBlocks
+            threeBlocks
+            steals
+            turnOvers
             twoPercentage
             threePercentage
             attemptTwoPercentage
@@ -108,12 +124,17 @@ query userGames {
             offensiveRebounds
             defensiveRebounds
             assists
+            twoBlocks
+            threeBlocks
+            steals
+            turnOvers
             twoPercentage
             threePercentage
             attemptTwoPercentage
             attemptThreePercentage
             pointsPerGame
             totalRebounds
+            totalBlocks
         }
     }
 }
@@ -133,12 +154,17 @@ query userPlayerGames($name: String!){
             offensiveRebounds
             defensiveRebounds
             assists
+            twoBlocks
+            threeBlocks
+            steals
+            turnOvers
             twoPercentage
             threePercentage
             attemptTwoPercentage
             attemptThreePercentage
             pointsPerGame
             totalRebounds
+            totalBlocks
         }
     }
 }
